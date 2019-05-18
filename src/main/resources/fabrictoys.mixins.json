@@ -3,9 +3,9 @@
   "package": "io.github.blayyke.fabrictoys.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "CampfireMixin"
   ],
   "client": [
-    "ExampleMixin"
   ],
   "injectors": {
     "defaultRequire": 1
