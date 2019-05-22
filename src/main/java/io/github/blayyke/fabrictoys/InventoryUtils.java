@@ -1,31 +1,47 @@
 package io.github.blayyke.fabrictoys;
 
 import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.DefaultedList;
+import net.minecraft.nbt.ListTag;
 
 public class InventoryUtils {
-    public static CraftingInventory fromTag(CompoundTag tag, int invSize) {
-        DefaultedList<ItemStack> items = DefaultedList.create(invSize, ItemStack.EMPTY);
-        Inventories.fromTag(tag, items);
-        CraftingInventory inv = new CraftingInventory(null, 3, 3);
-        for (int i = 0; i < items.size(); i++) {
-            inv.setInvStack(i, items.get(i));
-        }
-        return inv;
+    public static CompoundTag toTag(CompoundTag compoundTag_1, CraftingInventory defaultedList_1) {
+        return toTag(compoundTag_1, defaultedList_1, true);
     }
 
-    public static void toTag(CompoundTag tag, Inventory inventory) {
-        DefaultedList<ItemStack> items = DefaultedList.create(inventory.getInvSize(), ItemStack.EMPTY);
-        for (int i = 0; i < inventory.getInvSize(); i++) {
-            ItemStack invStack = inventory.getInvStack(i);
-            if (!invStack.isEmpty()) {
-                items.add(invStack);
+    public static CompoundTag toTag(CompoundTag tag, Inventory inv, boolean boolean_1) {
+        ListTag listTag_1 = new ListTag();
+
+        for (int int_1 = 0; int_1 < inv.getInvSize(); ++int_1) {
+            ItemStack itemStack_1 = inv.getInvStack(int_1);
+            if (!itemStack_1.isEmpty()) {
+                CompoundTag compoundTag_2 = new CompoundTag();
+                compoundTag_2.putByte("Slot", (byte) int_1);
+                itemStack_1.toTag(compoundTag_2);
+                listTag_1.add(compoundTag_2);
             }
         }
-        Inventories.toTag(tag, items);
+
+        if (!listTag_1.isEmpty() || boolean_1) {
+            tag.put("Items", listTag_1);
+        }
+
+        return tag;
+    }
+
+    public static CraftingInventory fromTag(CompoundTag tag, CraftingInventory inv) {
+        ListTag listTag_1 = tag.getList("Items", 10);
+
+        for (int int_1 = 0; int_1 < listTag_1.size(); ++int_1) {
+            CompoundTag compoundTag_2 = listTag_1.getCompoundTag(int_1);
+            int int_2 = compoundTag_2.getByte("Slot") & 255;
+            if (int_2 >= 0 && int_2 < inv.getInvSize()) {
+                inv.setInvStack(int_2, ItemStack.fromTag(compoundTag_2));
+            }
+        }
+
+        return inv;
     }
 }

@@ -19,8 +19,7 @@ public class CraftingBenchBlockEntity extends GenericBlockEntity {
         super.toTag(tag);
 
         CompoundTag invTag = new CompoundTag();
-        InventoryUtils.toTag(invTag, this.inventory);
-        tag.put("Inventory", invTag);
+        tag.put("Inventory", InventoryUtils.toTag(invTag, this.inventory));
         return tag;
     }
 
@@ -28,6 +27,6 @@ public class CraftingBenchBlockEntity extends GenericBlockEntity {
     public void fromTag(CompoundTag tag) {
         super.fromTag(tag);
 
-        this.inventory = InventoryUtils.fromTag(tag.getCompound("Inventory"), inventory.getInvSize());
+        InventoryUtils.fromTag(tag.getCompound("Inventory"), inventory);
     }
 }
