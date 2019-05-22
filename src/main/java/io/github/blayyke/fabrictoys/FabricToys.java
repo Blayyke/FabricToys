@@ -1,6 +1,9 @@
 package io.github.blayyke.fabrictoys;
 
+import io.github.blayyke.fabrictoys.blocks.FTBlockEntities;
+import io.github.blayyke.fabrictoys.blocks.FTBlocks;
 import io.github.blayyke.fabrictoys.config.Config;
+import io.github.blayyke.fabrictoys.items.FTItems;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.File;
@@ -13,6 +16,11 @@ public class FabricToys {
     @SuppressWarnings("unused")
     public static void init() throws IOException {
         CONFIG.read();
+        FTBlocks.init();
+        FTBlockEntities.init();
+        FTItems.init();
+        FTContainers.init();
+
         FTCommands.init();
 
         LOGGER.info("FabricToys initialized!");

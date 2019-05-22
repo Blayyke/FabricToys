@@ -13,6 +13,9 @@
   "entrypoints": {
     "main": [
       "io.github.blayyke.fabrictoys.FabricToys::init"
+    ],
+    "client": [
+      "io.github.blayyke.fabrictoys.FabricToysClient::init"
     ]
   },
   "mixins": [
