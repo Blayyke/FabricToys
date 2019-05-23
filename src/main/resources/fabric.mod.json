@@ -15,7 +15,7 @@
       "io.github.blayyke.fabrictoys.FabricToys::init"
     ],
     "client": [
-      "io.github.blayyke.fabrictoys.FabricToysClient::init"
+      "io.github.blayyke.fabrictoys.client.FabricToysClient::init"
     ]
   },
   "mixins": [
