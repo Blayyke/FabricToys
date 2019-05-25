@@ -7,6 +7,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.InfoEnchantment;
 import net.minecraft.item.EnchantedBookItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.Tickable;
 
 import java.util.ArrayList;
@@ -26,20 +27,24 @@ public class DisenchanterBlockEntity extends BlockEntityWithInventory implements
         if (emptyBooks.isEmpty() || tool.isEmpty() || !output.isEmpty()) {
             return;
         }
-        if (!tool.hasEnchantments()) {
-            return;
-        }
+//        if (!tool.hasEnchantments()) {
+//            return;
+//        }
 
         if (!world.isClient()) {
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(tool);
             Enchantment enchantment = new ArrayList<>(enchantments.keySet()).get(world.getRandom().nextInt(enchantments.size()));
-            enchantments.remove(enchantment);
-            // TODO remove enchantment from tool - IMPORTANT
 
-            emptyBooks.subtractAmount(1);
-            EnchantmentHelper.set(enchantments, tool);
-            ItemStack enchantedBook = EnchantedBookItem.makeStack(new InfoEnchantment(enchantment, enchantments.get(enchantment)));
-            setInvStack(2, enchantedBook);
+            if (tool.getItem() == Items.ENCHANTED_BOOK) {
+
+            } else {
+                emptyBooks.subtractAmount(1);
+                ItemStack enchantedBook = EnchantedBookItem.makeStack(new InfoEnchantment(enchantment, enchantments.get(enchantment)));
+                setInvStack(2, enchantedBook);
+
+                enchantments.remove(enchantment);
+                EnchantmentHelper.set(enchantments, tool);
+            }
         }
     }
 
