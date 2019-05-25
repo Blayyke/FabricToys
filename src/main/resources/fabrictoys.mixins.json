@@ -6,7 +6,11 @@
     "CampfireMixin",
     "InGameHudMixin",
     "ClientPlayerMixin",
-    "CraftingInventoryMixin"
+    "CraftingInventoryMixin",
+    "TallGrassMixin",
+    "ServerPlayerMixin",
+    "PlayerInventoryMixin",
+    "CropBlockMixin"
   ],
   "client": [
   ],

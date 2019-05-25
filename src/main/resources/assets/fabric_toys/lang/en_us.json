@@ -1,5 +1,10 @@
 {
   "itemGroup.fabric_toys.item_group": "FabricToys Items",
-  "block.fabric_toys.crafting_bench": "Crafting bench",
-  "fabric_toys.container.crafting_bench": "Crafting bench"
+  "block.fabric_toys.crafting_bench": "Crafting Bench",
+  "block.fabric_toys.disc_copier": "Disc Copier",
+  "block.fabric_toys.disenchanter": "Disenchanter",
+  "item.fabric_toys.blank_disc": "Blank Music Disc",
+  "fabric_toys.container.crafting_bench": "Crafting Bench",
+  "fabric_toys.container.disc_copier": "Disc Copier",
+  "fabric_toys.container.disenchanter": "Disenchanter"
 }

@@ -1,10 +1,6 @@
 package io.github.blayyke.fabrictoys.client;
 
-import io.github.blayyke.fabrictoys.FTScreens;
 import io.github.blayyke.fabrictoys.PrefixedLogger;
-import io.github.blayyke.fabrictoys.client.CompassHudRenderer;
-import io.github.blayyke.fabrictoys.client.HudRenderer;
-import io.github.blayyke.fabrictoys.client.ItemFrameHudRenderer;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.entity.player.PlayerEntity;
 
