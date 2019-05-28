@@ -1,9 +1,11 @@
 package io.github.blayyke.fabrictoys.mixins;
 
 import io.github.blayyke.fabrictoys.FabricToys;
+import io.github.blayyke.fabrictoys.util.ItemUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropBlock;
 import net.minecraft.block.PlantBlock;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
@@ -41,14 +43,14 @@ public abstract class CropBlockMixin extends PlantBlock {
 
     @Override
     public boolean activate(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult blockHitResult_1) {
-        if(FabricToys.CONFIG.enableCropHarvestTweak){
+        if (FabricToys.CONFIG.enableCropHarvestTweak) {
             int age = getAge(state);
             if (age == getMaxAge()) {
                 if (!world.isClient) {
                     List<ItemStack> droppedStacks = state.getDroppedStacks(new LootContext.Builder((ServerWorld) world).setRandom(world.random).put(LootContextParameters.POSITION, pos).put(LootContextParameters.TOOL, player.getStackInHand(hand)));
 
                     for (ItemStack drop : droppedStacks) {
-                        player.dropStack(drop);
+                        ItemUtils.dropStack(drop, world, pos);
                     }
                     world.setBlockState(pos, withAge(0));
                     world.playSound(player, pos, SoundEvents.BLOCK_CROP_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);

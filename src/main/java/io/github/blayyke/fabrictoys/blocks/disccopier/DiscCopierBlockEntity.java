@@ -27,6 +27,11 @@ public class DiscCopierBlockEntity extends BlockEntityWithInventory implements T
     }
 
     @Override
+    public String toString() {
+        return super.toString();
+    }
+
+    @Override
     public int getInvSize() {
         return 3;
     }

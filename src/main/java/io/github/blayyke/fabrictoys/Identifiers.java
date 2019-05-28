@@ -17,7 +17,6 @@ public class Identifiers {
         public static final String CRAFTING_BENCH = "crafting_bench";
         public static final String DISC_COPIER = "disc_copier";
         public static final String DISENCHANTER = "disenchanter";
-        public static final String GRAVE = "grave";
     }
 
     public class Items {

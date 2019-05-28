@@ -34,11 +34,10 @@ public class DisenchanterBlockEntity extends BlockEntityWithInventory implements
         if (!world.isClient()) {
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(tool);
             Enchantment enchantment = new ArrayList<>(enchantments.keySet()).get(world.getRandom().nextInt(enchantments.size()));
+            emptyBooks.subtractAmount(1);
 
             if (tool.getItem() == Items.ENCHANTED_BOOK) {
-
             } else {
-                emptyBooks.subtractAmount(1);
                 ItemStack enchantedBook = EnchantedBookItem.makeStack(new InfoEnchantment(enchantment, enchantments.get(enchantment)));
                 setInvStack(2, enchantedBook);
 

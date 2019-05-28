@@ -10,7 +10,8 @@
     "TallGrassMixin",
     "ServerPlayerMixin",
     "PlayerInventoryMixin",
-    "CropBlockMixin"
+    "CropBlockMixin",
+    "PickaxeItemMixin"
   ],
   "client": [
   ],

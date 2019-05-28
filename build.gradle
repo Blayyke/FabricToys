@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.2.2-SNAPSHOT'
+    id 'fabric-loom' version '0.2.4-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -28,6 +28,7 @@ dependencies {
     modCompile("roughly-enough-items:RoughlyEnoughItems:$rei_version")
     modCompile("cloth:ClothEvents:$cloth_events_version")
     modCompile("modmenu:ModMenu:$modmenu_version") { transitive = true }
+    compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 }
 
 processResources {
