@@ -7,11 +7,8 @@
     "InGameHudMixin",
     "ClientPlayerMixin",
     "CraftingInventoryMixin",
-    "TallGrassMixin",
-    "ServerPlayerMixin",
-    "PlayerInventoryMixin",
     "CropBlockMixin",
-    "PickaxeItemMixin"
+    "ServerPlayNetworkHandlerMixin"
   ],
   "client": [
   ],
