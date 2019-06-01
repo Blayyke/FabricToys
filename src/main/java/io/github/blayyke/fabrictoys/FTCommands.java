@@ -18,8 +18,13 @@ public class FTCommands {
     private static File lootTablesDir = new File("loot_tables");
     private static File blocksDir = new File(lootTablesDir, "blocks");
 
+    //Todo scrap all of this.
+    //todo Essentials-like commands
+    //todo ^ home cmds, spawn cmds, tp cmds.
+
     static {
         lootTablesDir.mkdirs();
+        Registry.BIOME.get(0).getTemperature();
         blocksDir.mkdir();
     }
 

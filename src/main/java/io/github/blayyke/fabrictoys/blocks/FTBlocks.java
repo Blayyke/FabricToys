@@ -15,6 +15,10 @@ public class FTBlocks {
     public static final Block DISC_COPIER = register(Identifiers.Blocks.DISC_COPIER, new DiscCopierBlock(FabricBlockSettings.copy(Blocks.JUKEBOX).build()));
     public static final Block DISENCHANTER = register(Identifiers.Blocks.DISENCHANTER, new DisenchanterBlock(FabricBlockSettings.copy(Blocks.ENCHANTING_TABLE).build()));
 
+    public static final Block ANDESITE_FURNACE = register(Identifiers.Blocks.ANDESITE_FURNACE, new FTFurnaceBlock(FabricBlockSettings.copy(Blocks.FURNACE).build()));
+    public static final Block DIORITE_FURNACE = register(Identifiers.Blocks.DIORITE_FURNACE, new FTFurnaceBlock(FabricBlockSettings.copy(Blocks.FURNACE).build()));
+    public static final Block GRANITE_FURNACE = register(Identifiers.Blocks.GRANITE_FURNACE, new FTFurnaceBlock(FabricBlockSettings.copy(Blocks.FURNACE).build()));
+
     private static <B extends Block> B register(String id, B block) {
         return Registry.register(Registry.BLOCK, new Identifier(Identifiers.MOD_ID, id), block);
     }

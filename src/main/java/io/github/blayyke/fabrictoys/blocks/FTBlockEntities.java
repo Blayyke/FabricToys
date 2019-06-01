@@ -15,6 +15,7 @@ public class FTBlockEntities {
     public static final BlockEntityType<?> CRAFTING_BENCH = register(Identifiers.Blocks.CRAFTING_BENCH, CraftingBenchBlockEntity::new, FTBlocks.CRAFTING_BENCH);
     public static final BlockEntityType<?> DISC_COPIER = register(Identifiers.Blocks.DISC_COPIER, DiscCopierBlockEntity::new, FTBlocks.DISC_COPIER);
     public static final BlockEntityType<?> DISENCHANTER = register(Identifiers.Blocks.DISENCHANTER, DisenchanterBlockEntity::new, FTBlocks.DISENCHANTER);
+    public static final BlockEntityType<?> FURNACE = register(Identifiers.Blocks.FURNACE, FTFurnaceBlockEntity::new, FTBlocks.ANDESITE_FURNACE, FTBlocks.DIORITE_FURNACE, FTBlocks.GRANITE_FURNACE);
 
     private static <K extends BlockEntity> BlockEntityType<K> register(String id, Supplier<K> entitySupplier, Block... blocks) {
         // ... .build(null) <- null is datafixer, they don't work with mods.
