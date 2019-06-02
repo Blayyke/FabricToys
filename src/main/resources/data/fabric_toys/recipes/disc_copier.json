@@ -8,7 +8,7 @@
   ],
   "key": {
     "W": {
-      "item": "minecraft:iron_ingot"
+      "tag": "minecraft:planks"
     },
     "B": {
       "item": "fabric_toys:blank_disc"

@@ -1,5 +1,6 @@
-package io.github.blayyke.fabrictoys.blocks;
+package io.github.blayyke.fabrictoys.blocks.furnace;
 
+import io.github.blayyke.fabrictoys.blocks.FTBlockEntities;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.container.Container;
 import net.minecraft.container.FurnaceContainer;

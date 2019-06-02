@@ -16,7 +16,6 @@ public class Identifiers {
     public static class Blocks {
         public static final String CRAFTING_BENCH = "crafting_bench";
         public static final String DISC_COPIER = "disc_copier";
-        public static final String DISENCHANTER = "disenchanter";
         public static final String ANDESITE_FURNACE = "andesite_furnace";
         public static final String DIORITE_FURNACE = "diorite_furnace";
         public static final String GRANITE_FURNACE = "granite_furnace";

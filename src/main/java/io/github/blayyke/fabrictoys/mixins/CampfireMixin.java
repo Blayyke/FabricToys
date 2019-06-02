@@ -10,31 +10,6 @@ import org.spongepowered.asm.mixin.injection.Slice;
 
 @Mixin(CampfireBlock.class)
 public class CampfireMixin {
-//    @ModifyVariable(method = "getPlacementState", at = @At(value = "INVOKE"), print = true)
-//    public boolean setBoolean_1(boolean current) {
-//        return true;
-//    }
-
-    //    @ModifyArg(
-//            method = "getPlacementState",
-//            at = @At(
-//                    value = "INVOKE",
-//                    target = "Lnet/minecraft/block/BlockState;with(Lnet/minecraft/state/property/Property;Ljava/lang/Comparable;)Ljava/lang/Object;"
-//            ),
-//            index = 1
-//    )
-//    private Comparable<?> modifyLitState(final Property<?> property, final Comparable<?> value) {
-//        if (FabricToys.CONFIG.enableCampfireTweak) {
-//            if (LIT == property) {
-//                return false; // or your value
-//            } else {
-//                return value;
-//            }
-//        } else {
-//            return value;
-//        }
-//    }
-//  Below is safer..
     @ModifyArg(
             method = "getPlacementState",
             at = @At(

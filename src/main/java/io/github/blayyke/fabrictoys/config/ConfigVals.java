@@ -11,7 +11,7 @@ public class ConfigVals {
     public boolean enableCropHarvestTweak = true;
 
     @Comment("The timeout that players are kicked after when a keepalive has not been received in the time period.\nThe default for vanilla is 15000.")
-    public long keepaliveTimeout = 15000L;
+    public long keepaliveTimeout = 50000L;
 
     @Comment("Should the mod log when a player is timed out.")
     public boolean logOnTimeout = true;

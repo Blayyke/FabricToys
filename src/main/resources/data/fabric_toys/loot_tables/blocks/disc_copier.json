@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "fabric_toys:crafting_bench"
+          "name": "fabric_toys:disc_copier"
         }
       ],
       "conditions": [

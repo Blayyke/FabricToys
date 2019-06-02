@@ -1,4 +1,4 @@
-package io.github.blayyke.fabrictoys.blocks;
+package io.github.blayyke.fabrictoys.blocks.furnace;
 
 import net.minecraft.block.FurnaceBlock;
 import net.minecraft.block.entity.BlockEntity;
@@ -10,7 +10,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class FTFurnaceBlock extends FurnaceBlock {
-    protected FTFurnaceBlock(Settings block$Settings_1) {
+    public FTFurnaceBlock(Settings block$Settings_1) {
         super(block$Settings_1);
     }
 
