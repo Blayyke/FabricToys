@@ -6,5 +6,7 @@
   "item.fabric_toys.blank_disc": "Blank Music Disc",
   "fabric_toys.container.crafting_bench": "Crafting Bench",
   "fabric_toys.container.disc_copier": "Disc Copier",
-  "fabric_toys.container.disenchanter": "Disenchanter"
+  "fabric_toys.container.disenchanter": "Disenchanter",
+
+  "fabric_toys.cmd.error": "Caught error when running command: %s"
 }

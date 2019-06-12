@@ -3,6 +3,7 @@ package io.github.blayyke.fabrictoys.mixins;
 import io.github.blayyke.fabrictoys.FabricToys;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.network.packet.ChatMessageC2SPacket;
 import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,5 +34,10 @@ public class ServerPlayNetworkHandlerMixin {
     @ModifyConstant(method = "tick", constant = @Constant(longValue = 15000L))
     private long modifyKeepaliveTimeout(long l) {
         return FabricToys.CONFIG.keepaliveTimeout;
+    }
+
+    @Inject(method = "onChatMessage", at = @At("HEAD"))
+    private void onMessage(ChatMessageC2SPacket packet, CallbackInfo info) {
+        // Process the message from the player. Cancel this if I dont want it to be sent to others?
     }
 }

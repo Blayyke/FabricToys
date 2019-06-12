@@ -9,6 +9,8 @@
     "ServerPlayNetworkHandlerMixin"
   ],
   "client": [
+    "ClientPlayNetworkHandlerMixin",
+    "ScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
