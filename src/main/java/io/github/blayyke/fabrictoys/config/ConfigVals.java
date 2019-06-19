@@ -15,4 +15,7 @@ public class ConfigVals {
 
     @Comment("Should the mod log when a player is timed out.")
     public boolean logOnTimeout = true;
+
+    @Comment("Allow placing eggs on the ground for a 100% chicken spawn rate.")
+    public boolean enableEggPlacement;
 }

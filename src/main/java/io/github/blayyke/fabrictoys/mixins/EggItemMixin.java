@@ -1,5 +1,6 @@
 package io.github.blayyke.fabrictoys.mixins;
 
+import io.github.blayyke.fabrictoys.FabricToys;
 import io.github.blayyke.fabrictoys.blocks.FTBlocks;
 import net.minecraft.item.EggItem;
 import net.minecraft.item.Item;
@@ -16,10 +17,12 @@ public abstract class EggItemMixin extends Item {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext ctx) {
-        BlockPos blockPos = ctx.getBlockPos().up();
-        if (ctx.getWorld().isAir(blockPos)) {
-            ctx.getWorld().setBlockState(blockPos, FTBlocks.EGG.getDefaultState());
-            return ActionResult.SUCCESS;
+        if (FabricToys.CONFIG.enableEggPlacement) {
+            BlockPos blockPos = ctx.getBlockPos().up();
+            if (ctx.getWorld().isAir(blockPos)) {
+                ctx.getWorld().setBlockState(blockPos, FTBlocks.EGG.getDefaultState());
+                return ActionResult.SUCCESS;
+            }
         }
         return super.useOnBlock(ctx);
     }
