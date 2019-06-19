@@ -17,5 +17,5 @@ public class ConfigVals {
     public boolean logOnTimeout = true;
 
     @Comment("Allow placing eggs on the ground for a 100% chicken spawn rate.")
-    public boolean enableEggPlacement;
+    public boolean enableEggPlacement = true;
 }
