@@ -20,6 +20,7 @@ public class Identifiers {
         public static final String DIORITE_FURNACE = "diorite_furnace";
         public static final String GRANITE_FURNACE = "granite_furnace";
         public static final String FURNACE = "furnace";
+        public static final String EGG = "egg";
     }
 
     public class Items {

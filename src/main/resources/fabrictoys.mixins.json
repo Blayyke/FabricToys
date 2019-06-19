@@ -6,7 +6,8 @@
     "CampfireMixin",
     "InGameHudMixin",
     "ClientPlayerMixin",
-    "ServerPlayNetworkHandlerMixin"
+    "ServerPlayNetworkHandlerMixin",
+    "EggItemMixin"
   ],
   "client": [
     "ClientPlayNetworkHandlerMixin",
