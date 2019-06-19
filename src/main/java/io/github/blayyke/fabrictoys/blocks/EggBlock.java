@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class EggBlock extends Block {
-    private static final VoxelShape SMALL_SHAPE = Block.createCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 9.0D, 11.0D);
+    private static final VoxelShape SMALL_SHAPE = Block.createCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 10.0D, 12.0D);
     private static final IntegerProperty HATCH = Properties.HATCH;
 
     public EggBlock(Block.Settings settings) {
