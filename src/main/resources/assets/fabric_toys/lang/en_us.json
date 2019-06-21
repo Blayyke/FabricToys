@@ -1,12 +1,15 @@
 {
   "itemGroup.fabric_toys.item_group": "FabricToys Items",
+
   "block.fabric_toys.crafting_bench": "Crafting Bench",
   "block.fabric_toys.disc_copier": "Disc Copier",
-  "block.fabric_toys.disenchanter": "Disenchanter",
+  "block.fabric_toys.andesite_furnace": "Andesite Furnace",
+  "block.fabric_toys.granite_furnace": "Granite Furnace",
+  "block.fabric_toys.diorite_furnace": "Diorite Furnace",
+
   "item.fabric_toys.blank_disc": "Blank Music Disc",
-  "fabric_toys.container.crafting_bench": "Crafting Bench",
+
   "fabric_toys.container.disc_copier": "Disc Copier",
-  "fabric_toys.container.disenchanter": "Disenchanter",
 
   "fabric_toys.cmd.error": "Caught error when running command: %s"
 }
