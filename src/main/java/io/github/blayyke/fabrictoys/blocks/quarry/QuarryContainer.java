@@ -3,6 +3,7 @@ package io.github.blayyke.fabrictoys.blocks.quarry;
 import io.github.blayyke.fabrictoys.Identifiers;
 import io.github.blayyke.fabrictoys.blocks.FTBlocks;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.container.BlockContext;
 import net.minecraft.container.Container;
@@ -90,6 +91,58 @@ public class QuarryContainer extends Container {
         }
 
         return this.quarry.getFuelTime() * 13 / int_1;
+    }
+
+    public ItemStack transferSlot(PlayerEntity playerEntity_1, int int_1) {
+        ItemStack itemStack_1 = ItemStack.EMPTY;
+        Slot slot_1 = this.slotList.get(int_1);
+        if (slot_1 != null && slot_1.hasStack()) {
+            ItemStack itemStack_2 = slot_1.getStack();
+            itemStack_1 = itemStack_2.copy();
+            if (int_1 == 2) {
+                if (!this.insertItem(itemStack_2, 3, 39, true)) {
+                    return ItemStack.EMPTY;
+                }
+
+                slot_1.onStackChanged(itemStack_2, itemStack_1);
+            } else if (int_1 != 1 && int_1 != 0) {
+                if (this.isPickaxe(itemStack_2)) {
+                    if (!this.insertItem(itemStack_2, PICKAXE_SLOT, 1, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (this.isFuel(itemStack_2)) {
+                    if (!this.insertItem(itemStack_2, FUEL_SLOT, 2, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (int_1 >= 30 && int_1 < 39 && !this.insertItem(itemStack_2, 3, 30, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (!this.insertItem(itemStack_2, 3, 39, false)) {
+                return ItemStack.EMPTY;
+            }
+
+            if (itemStack_2.isEmpty()) {
+                slot_1.setStack(ItemStack.EMPTY);
+            } else {
+                slot_1.markDirty();
+            }
+
+            if (itemStack_2.getCount() == itemStack_1.getCount()) {
+                return ItemStack.EMPTY;
+            }
+
+            slot_1.onTakeItem(playerEntity_1, itemStack_2);
+        }
+
+        return itemStack_1;
+    }
+
+    protected boolean isPickaxe(ItemStack itemStack_1) {
+        return itemStack_1.getItem() instanceof PickaxeItem;//TODO check pickaxe tags.
+    }
+
+    private boolean isFuel(ItemStack itemStack_2) {
+        return AbstractFurnaceBlockEntity.canUseAsFuel(itemStack_2);
     }
 
     public boolean isBurningFuel() {

@@ -20,10 +20,5 @@ public class FTScreens {
         ScreenProviderRegistry.INSTANCE.registerFactory(FTContainers.QUARRY, (syncId, id, player, buf) -> {
             return new QuarryScreen(new QuarryContainer(syncId, player, BlockContext.create(player.world, buf.readBlockPos())), player.inventory);
         });
-
-        ClientSpriteRegistryCallback.event(SpriteAtlasTexture.STATUS_EFFECT_ATLAS_TEX).register((atlasTexture, registry) -> {
-            registry.register(new Identifier(Identifiers.MOD_ID, "slot/coal"));
-            registry.register(new Identifier(Identifiers.MOD_ID, "slot/pickaxe"));
-        });
     }
 }

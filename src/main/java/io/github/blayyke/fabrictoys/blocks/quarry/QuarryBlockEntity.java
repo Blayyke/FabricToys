@@ -1,6 +1,5 @@
 package io.github.blayyke.fabrictoys.blocks.quarry;
 
-import com.sun.istack.internal.NotNull;
 import io.github.blayyke.fabrictoys.InventoryUtils;
 import io.github.blayyke.fabrictoys.blocks.BlockEntityWithInventory;
 import io.github.blayyke.fabrictoys.blocks.FTBlockEntities;
@@ -14,13 +13,14 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.loot.context.LootContext;
 import net.minecraft.world.loot.context.LootContextParameters;
 
 import java.util.List;
 
 public class QuarryBlockEntity extends BlockEntityWithInventory implements Tickable {
-    private final int mineDelay = 20;
+    private final int mineDelay = 2; // todo put back to 20
     private int mineTime = 0;
     private BlockPos corner1;
     private BlockPos corner2;
@@ -29,7 +29,6 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
     private int maxFuelTime = 100; // 5 seconds
     private Inventory inventory;
 
-    @NotNull
     private QuarryStatus status;
 
     public QuarryBlockEntity() {
@@ -39,8 +38,29 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
     @Override
     public void tick() {
         if (corner1 == null || corner2 == null) {
-            corner1 = new BlockPos(pos.getX() - 3, 0, pos.getZ() - 3);
-            corner2 = new BlockPos(pos.getX() + 4, pos.getY() - 1, pos.getZ() + 4);
+            int offset = 5;
+            Direction facing = world.getBlockState(pos).get(QuarryBlock.FACING).getOpposite();
+            System.out.println("FAcing: " + facing);
+            switch (facing) {
+                case NORTH:
+                    corner1 = new BlockPos(pos.getX() - 3, 0, pos.getZ() - 3 - offset);
+                    corner2 = new BlockPos(pos.getX() + 4, pos.getY() - 1, pos.getZ() + 4 - offset);
+                    break;
+                case EAST:
+                    corner1 = new BlockPos(pos.getX() - 3 + offset, 0, pos.getZ() - 3);
+                    corner2 = new BlockPos(pos.getX() + 4 + offset, pos.getY() - 1, pos.getZ() + 4);
+                    break;
+                case SOUTH:
+                    corner1 = new BlockPos(pos.getX() - 3, 0, pos.getZ() - 3 + offset);
+                    corner2 = new BlockPos(pos.getX() + 4, pos.getY() - 1, pos.getZ() + 4 + offset);
+                    break;
+                case WEST:
+                    corner1 = new BlockPos(pos.getX() - 3 - offset, 0, pos.getZ() - 3);
+                    corner2 = new BlockPos(pos.getX() + 4 - offset, pos.getY() - 1, pos.getZ() + 4);
+                    break;
+                default:
+                    throw new RuntimeException("Horizontal facing property should never be anything other than NESW! Got " + facing);
+            }
         }
 
         ItemStack fuel = getInvStack(QuarryContainer.FUEL_SLOT);
@@ -132,7 +152,7 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
 //                    item.addVelocity(0.2D, 0.6D, 0.2D);
                             world.spawnEntity(item);
                         }
-                        System.out.println("Mined block @ " + pos + ".");
+//                        System.out.println("Mined block @ " + pos + ".");
 
                         return;
                     }

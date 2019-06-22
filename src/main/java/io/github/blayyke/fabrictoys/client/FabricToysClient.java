@@ -1,13 +1,17 @@
 package io.github.blayyke.fabrictoys.client;
 
+import io.github.blayyke.fabrictoys.Identifiers;
 import io.github.blayyke.fabrictoys.PrefixedLogger;
 import io.github.blayyke.fabrictoys.events.ClientDisplayMessageCallback;
+import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.minecraft.ChatFormat;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +23,11 @@ public class FabricToysClient {
     @SuppressWarnings("unused")
     public static void init() {
         FTScreens.init();
+
+        ClientSpriteRegistryCallback.event(SpriteAtlasTexture.BLOCK_ATLAS_TEX).register((atlasTexture, registry) -> {
+            registry.register(new Identifier(Identifiers.MOD_ID, "slot/coal"));
+            registry.register(new Identifier(Identifiers.MOD_ID, "slot/pickaxe"));
+        });
 
         HUD_RENDERERS.add(new ItemFrameHudRenderer());
         HUD_RENDERERS.add(new CompassHudRenderer());

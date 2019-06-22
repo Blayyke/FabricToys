@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
       "model": "fabric_toys:block/quarry"
+    },
+    "facing=south": {
+      "model": "fabric_toys:block/quarry",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "fabric_toys:block/quarry",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "fabric_toys:block/quarry",
+      "y": 90
     }
   }
 }

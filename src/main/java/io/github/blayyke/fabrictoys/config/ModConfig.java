@@ -4,7 +4,6 @@ import blue.endless.jankson.Jankson;
 import blue.endless.jankson.JsonObject;
 import blue.endless.jankson.impl.SyntaxError;
 import io.github.blayyke.fabrictoys.FabricToys;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -50,11 +49,5 @@ public class ModConfig {
             FabricToys.LOGGER.warn("Failed to save config defaults!");
             e.printStackTrace();
         }
-    }
-
-    public void write() throws IOException {
-//        jankson.toJson()
-//        FabricToys.LOGGER.info("Saved config to file");
-        throw new NotImplementedException();
     }
 }
