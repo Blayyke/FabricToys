@@ -25,7 +25,7 @@ public abstract class FTContainerScreen<C extends Container> extends AbstractCon
     @Override
     protected void drawForeground(int int_1, int int_2) {
         this.font.draw(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float) (this.containerHeight - 96 + 2), 0x404040);
-        this.font.draw(this.title.getFormattedText(), 28.0F, 6.0F, 0x404040);
+        this.font.draw(this.title.getFormattedText(), 8.0F, 6.0F, 0x404040);
         this.drawTextOverlays();
     }
 

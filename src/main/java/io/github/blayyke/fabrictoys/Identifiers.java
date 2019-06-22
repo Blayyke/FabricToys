@@ -13,7 +13,7 @@ public class Identifiers {
         return of("gui/" + id);
     }
 
-    public static String slot(String path) {
+    public static String slotSprite(String path) {
         return MOD_ID + ":slot/" + path;
     }
 

@@ -1,9 +1,11 @@
 package io.github.blayyke.fabrictoys.blocks.quarry;
 
+import io.github.blayyke.fabrictoys.Identifiers;
 import io.github.blayyke.fabrictoys.InventoryUtils;
 import io.github.blayyke.fabrictoys.blocks.BlockEntityWithInventory;
 import io.github.blayyke.fabrictoys.blocks.FTBlockEntities;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.minecraft.ChatFormat;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.ItemEntity;
@@ -20,7 +22,9 @@ import net.minecraft.world.loot.context.LootContextParameters;
 import java.util.List;
 
 public class QuarryBlockEntity extends BlockEntityWithInventory implements Tickable {
-    private final int mineDelay = 2; // todo put back to 20
+    // TODO add quarry mining positions to the GUI, and not statically based on which way the quarry is facing. Do not allow the mining area to be more than 3 blocks away from the quarry at any side. Default to just under the quarry to bedrock.
+
+    private final int mineDelay = 20;
     private int mineTime = 0;
     private BlockPos corner1;
     private BlockPos corner2;
@@ -40,7 +44,6 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
         if (corner1 == null || corner2 == null) {
             int offset = 5;
             Direction facing = world.getBlockState(pos).get(QuarryBlock.FACING).getOpposite();
-            System.out.println("FAcing: " + facing);
             switch (facing) {
                 case NORTH:
                     corner1 = new BlockPos(pos.getX() - 3, 0, pos.getZ() - 3 - offset);
@@ -59,6 +62,7 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
                     corner2 = new BlockPos(pos.getX() + 4 - offset, pos.getY() - 1, pos.getZ() + 4);
                     break;
                 default:
+                    // This should never happen, but here it is anyway. Don't want a null status that is a PITA to track down the line.
                     throw new RuntimeException("Horizontal facing property should never be anything other than NESW! Got " + facing);
             }
         }
@@ -111,7 +115,7 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
             for (int x = corner1.getX(); x < corner2.getX(); x++) {
                 for (int z = corner1.getZ(); z < corner2.getZ(); z++) {
                     pos.set(x, y, z);
-                    if (!world.isAir(pos)) {
+                    if (shouldMineBlock(pos)) {
                         BlockState block = world.getBlockState(pos);
                         world.clearBlockState(pos, true);
                         pickaxe.damage(1, world.random, null);
@@ -161,6 +165,11 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
         }
     }
 
+    private boolean shouldMineBlock(BlockPos.Mutable pos) {
+        // Do not mine air. Do not mine any block with a hardness less than zero.
+        return !world.isAir(pos) && world.getBlockState(pos).getHardness(world, pos) > 0;
+    }
+
     private ItemStack getTool() {
         return getInvStack(QuarryContainer.PICKAXE_SLOT);
     }
@@ -197,7 +206,23 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
         return this.status;
     }
 
-    private enum QuarryStatus {
-        MINING, NO_FUEL, NO_PICKAXE
+    public enum QuarryStatus {
+        MINING(Identifiers.MOD_ID + ".machine_status.active", 0x3ab700), NO_FUEL(Identifiers.MOD_ID + ".machine_status.no_fuel", ChatFormat.RED.getColor()), NO_PICKAXE(Identifiers.MOD_ID + ".machine_status.no_pickaxe", 0x404040);
+
+        private final String displayText;
+        private final Integer color;
+
+        QuarryStatus(String displayText, Integer color) {
+            this.displayText = displayText;
+            this.color = color;
+        }
+
+        public String getDisplayText() {
+            return displayText;
+        }
+
+        public Integer getColor() {
+            return color;
+        }
     }
 }

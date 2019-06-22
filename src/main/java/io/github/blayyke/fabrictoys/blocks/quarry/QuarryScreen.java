@@ -28,6 +28,9 @@ public class QuarryScreen extends FTContainerScreen {
 
     @Override
     protected void drawTextOverlays() {
-        this.font.drawWithShadow("Status: " + ((QuarryContainer) this.container).quarry.getStatus(), this.left + 80, this.top + 6, 0x000000);
+        QuarryBlockEntity.QuarryStatus status = ((QuarryContainer) this.container).quarry.getStatus();
+
+        this.font.draw("Status: ", 110, 17, 0x404040);
+        this.font.draw(new TranslatableComponent(status.getDisplayText()).getFormattedText(), 110, 28, status.getColor());
     }
 }
