@@ -140,7 +140,8 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
                                         } else if (ItemStack.areItemsEqualIgnoreDamage(invStack, stack)) {
                                             if (invStack.getCount() < invStack.getMaxCount()) {
                                                 // TODO If current slot amount + mined item amount > slot stack getMaxAmount(), it will still only be added to the max and then extras are deleted.
-                                                invStack.increment(stack.getCount());
+                                                int remaining = invStack.getMaxCount() - stack.getCount();
+                                                invStack.increment(Math.min(remaining, stack.getCount()));
                                                 break;
                                             }
                                         }
