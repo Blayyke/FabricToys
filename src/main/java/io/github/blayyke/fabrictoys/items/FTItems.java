@@ -13,13 +13,14 @@ import net.minecraft.util.registry.Registry;
 public class FTItems {
     public static ItemGroup GROUP = FabricItemGroupBuilder.create(new Identifier(Identifiers.MOD_ID, "item_group")).icon(() -> new ItemStack(FTBlocks.ANDESITE_FURNACE)).build();
 
-    public static final BlockItem DISC_COPIER = register(Identifiers.Blocks.DISC_COPIER, new BlockItem(FTBlocks.DISC_COPIER, new Item.Settings().itemGroup(GROUP)));
+    public static final BlockItem DISC_COPIER = register(Identifiers.Blocks.DISC_COPIER, new BlockItem(FTBlocks.DISC_COPIER, new Item.Settings().group(GROUP)));
 
-    public static final BlockItem ANDESITE_FURNACE = register(Identifiers.Blocks.ANDESITE_FURNACE, new BlockItem(FTBlocks.ANDESITE_FURNACE, new Item.Settings().itemGroup(GROUP)));
-    public static final BlockItem DIORITE_FURNACE = register(Identifiers.Blocks.DIORITE_FURNACE, new BlockItem(FTBlocks.DIORITE_FURNACE, new Item.Settings().itemGroup(GROUP)));
-    public static final BlockItem GRANITE_FURNACE = register(Identifiers.Blocks.GRANITE_FURNACE, new BlockItem(FTBlocks.GRANITE_FURNACE, new Item.Settings().itemGroup(GROUP)));
+    public static final BlockItem ANDESITE_FURNACE = register(Identifiers.Blocks.ANDESITE_FURNACE, new BlockItem(FTBlocks.ANDESITE_FURNACE, new Item.Settings().group(GROUP)));
+    public static final BlockItem DIORITE_FURNACE = register(Identifiers.Blocks.DIORITE_FURNACE, new BlockItem(FTBlocks.DIORITE_FURNACE, new Item.Settings().group(GROUP)));
+    public static final BlockItem GRANITE_FURNACE = register(Identifiers.Blocks.GRANITE_FURNACE, new BlockItem(FTBlocks.GRANITE_FURNACE, new Item.Settings().group(GROUP)));
+    public static final BlockItem QUARRY = register(Identifiers.Blocks.QUARRY, new BlockItem(FTBlocks.QUARRY, new Item.Settings().group(GROUP)));
 
-    public static Item BLANK_DISC = register(Identifiers.Items.BLANK_DISC, new BlankDiscItem(new Item.Settings().itemGroup(GROUP).stackSize(1)));
+    public static Item BLANK_DISC = register(Identifiers.Items.BLANK_DISC, new BlankDiscItem(new Item.Settings().group(GROUP).maxCount(1)));
     //TODO foods?
     //tODO tools?
     //todo armors?

@@ -12,7 +12,7 @@ import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateFactory;
-import net.minecraft.state.property.IntegerProperty;
+import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
@@ -24,7 +24,7 @@ import java.util.Random;
 
 public class EggBlock extends Block {
     private static final VoxelShape SMALL_SHAPE = Block.createCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 10.0D, 12.0D);
-    private static final IntegerProperty HATCH = Properties.HATCH;
+    private static final IntProperty HATCH = Properties.HATCH;
 
     public EggBlock(Block.Settings settings) {
         super(settings);
@@ -96,6 +96,6 @@ public class EggBlock extends Block {
 
     @Override
     public ItemStack getPickStack(BlockView blockView_1, BlockPos blockPos_1, BlockState blockState_1) {
-        return Items.EGG.getDefaultStack();
+        return new ItemStack(Items.EGG);
     }
 }

@@ -21,14 +21,9 @@ public class DiscCopierBlockEntity extends BlockEntityWithInventory implements T
         }
 
         if (!world.isClient()) {
-            blankStack.subtractAmount(1);
+            blankStack.decrement(1);
             setInvStack(2, toCopy.copy());
         }
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
     }
 
     @Override

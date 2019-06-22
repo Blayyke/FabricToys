@@ -44,4 +44,13 @@ public class InventoryUtils {
 
         return inv;
     }
+
+    public static boolean isInvFull(Inventory inventory) {
+        for (int i = 0; i < inventory.getInvSize(); i++) {
+            if (inventory.getInvStack(i).isEmpty()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -6,10 +6,12 @@
   "block.fabric_toys.andesite_furnace": "Andesite Furnace",
   "block.fabric_toys.granite_furnace": "Granite Furnace",
   "block.fabric_toys.diorite_furnace": "Diorite Furnace",
+  "block.fabric_toys.quarry": "Quarry",
 
   "item.fabric_toys.blank_disc": "Blank Music Disc",
 
   "fabric_toys.container.disc_copier": "Disc Copier",
+  "fabric_toys.container.quarry": "Quarry",
 
   "fabric_toys.cmd.error": "Caught error when running command: %s"
 }

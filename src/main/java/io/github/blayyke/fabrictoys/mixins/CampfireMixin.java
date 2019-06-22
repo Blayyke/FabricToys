@@ -18,7 +18,7 @@ public class CampfireMixin {
             ),
             slice = @Slice(
                     from = @At(value = "FIELD", target = "Lnet/minecraft/block/CampfireBlock;LIT:Lnet/minecraft/state/property/BooleanProperty;"),
-                    to = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemPlacementContext;getPlayerHorizontalFacing()Lnet/minecraft/util/math/Direction;")
+                    to = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemPlacementContext;getPlayerFacing()Lnet/minecraft/util/math/Direction;")
             ),
             index = 1,
             allow = 1

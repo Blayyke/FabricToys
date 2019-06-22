@@ -1,0 +1,183 @@
+package io.github.blayyke.fabrictoys.blocks.quarry;
+
+import com.sun.istack.internal.NotNull;
+import io.github.blayyke.fabrictoys.InventoryUtils;
+import io.github.blayyke.fabrictoys.blocks.BlockEntityWithInventory;
+import io.github.blayyke.fabrictoys.blocks.FTBlockEntities;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Tickable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.loot.context.LootContext;
+import net.minecraft.world.loot.context.LootContextParameters;
+
+import java.util.List;
+
+public class QuarryBlockEntity extends BlockEntityWithInventory implements Tickable {
+    private final int mineDelay = 20;
+    private int mineTime = 0;
+    private BlockPos corner1;
+    private BlockPos corner2;
+
+    private int fuelTime;
+    private int maxFuelTime = 100; // 5 seconds
+    private Inventory inventory;
+
+    @NotNull
+    private QuarryStatus status;
+
+    public QuarryBlockEntity() {
+        super(FTBlockEntities.QUARRY);
+    }
+
+    @Override
+    public void tick() {
+        if (corner1 == null || corner2 == null) {
+            corner1 = new BlockPos(pos.getX() - 3, 0, pos.getZ() - 3);
+            corner2 = new BlockPos(pos.getX() + 4, pos.getY() - 1, pos.getZ() + 4);
+        }
+
+        ItemStack fuel = getInvStack(QuarryContainer.FUEL_SLOT);
+        ItemStack pickaxe = getTool();
+
+        if (fuelTime > 0) {
+            fuelTime--;
+        }
+
+        if (pickaxe.isEmpty()) {
+            // No tool to mine with.
+            this.status = QuarryStatus.NO_PICKAXE;
+            return;
+        }
+        if (fuelTime <= 0) {
+            if (fuel.isEmpty()) {
+                // Fuel ran out, and there's no fuel in the fuel slot.
+                this.status = QuarryStatus.NO_FUEL;
+                return;
+            } else {
+                maxFuelTime = FuelRegistry.INSTANCE.get(fuel.getItem());
+                fuelTime = maxFuelTime;
+                fuel.decrement(1);
+            }
+        }
+
+        this.status = QuarryStatus.MINING;
+        mineTime++;
+
+        if (mineTime >= mineDelay) {
+            mineTime = 0;
+            if (!world.isClient) {
+                BlockEntity above = world.getBlockEntity(this.pos.add(0, 1, 0));
+                if (above instanceof Inventory) {
+                    this.inventory = (Inventory) above;
+                } else {
+                    this.inventory = null;
+                }
+                tryMineBlock(pickaxe);
+            }
+        }
+    }
+
+    private void tryMineBlock(ItemStack pickaxe) {
+        BlockPos.Mutable pos = new BlockPos.Mutable();
+        // Loop Y first, so it goes top to bottom.
+        for (int y = corner2.getY(); y > corner1.getY(); y--) {
+            for (int x = corner1.getX(); x < corner2.getX(); x++) {
+                for (int z = corner1.getZ(); z < corner2.getZ(); z++) {
+                    pos.set(x, y, z);
+                    if (!world.isAir(pos)) {
+                        BlockState block = world.getBlockState(pos);
+                        world.clearBlockState(pos, true);
+                        pickaxe.damage(1, world.random, null);
+                        List<ItemStack> stacks = block.getDroppedStacks(new LootContext.Builder((ServerWorld) world)
+                                .put(LootContextParameters.TOOL, pickaxe)
+                                .put(LootContextParameters.POSITION, pos)
+                        );
+                        if (pickaxe.getDamage() >= pickaxe.getMaxDamage()) {
+                            System.out.println("Gone through a pickaxe!");
+                            this.setInvStack(QuarryContainer.PICKAXE_SLOT, ItemStack.EMPTY);
+                        }
+
+                        for (ItemStack stack : stacks) {
+                            if (inventory != null) {
+                                // Inv above, add to inv.
+                                if (!InventoryUtils.isInvFull(inventory)) {
+                                    for (int i = 0; i < inventory.getInvSize(); i++) {
+                                        ItemStack invStack = inventory.getInvStack(i);
+                                        if (invStack.isEmpty()) {
+                                            inventory.setInvStack(i, stack);
+                                            break;
+                                        } else if (ItemStack.areItemsEqualIgnoreDamage(invStack, stack)) {
+                                            if (invStack.getCount() < invStack.getMaxCount()) {
+                                                // TODO If current slot amount + mined item amount > slot stack getMaxAmount(), it will still only be added to the max and then extras are deleted.
+                                                invStack.increment(stack.getCount());
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    break;
+                                }
+                                // If inv is full, drop it as a stack.
+                            }
+
+                            // No inv above, drop it instead
+                            ItemEntity item = new ItemEntity(world, this.pos.getX(), this.pos.getY() + 1, this.pos.getZ(), stack);
+                            item.setToDefaultPickupDelay();
+//                    item.addVelocity(0.2D, 0.6D, 0.2D);
+                            world.spawnEntity(item);
+                        }
+                        System.out.println("Mined block @ " + pos + ".");
+
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    private ItemStack getTool() {
+        return getInvStack(QuarryContainer.PICKAXE_SLOT);
+    }
+
+    @Override
+    public CompoundTag toTag(CompoundTag tag) {
+        super.toTag(tag);
+        tag.putInt("FuelTime", this.fuelTime);
+        tag.putInt("MaxFuelTime", this.maxFuelTime);
+        return tag;
+    }
+
+    @Override
+    public void fromTag(CompoundTag tag) {
+        super.fromTag(tag);
+        this.fuelTime = tag.getInt("FuelTime");
+        this.maxFuelTime = tag.getInt("MaxFuelTime");
+    }
+
+    @Override
+    public int getInvSize() {
+        return 2;
+    }
+
+    public int getMaxFuelTime() {
+        return maxFuelTime;
+    }
+
+    public int getFuelTime() {
+        return fuelTime;
+    }
+
+    public QuarryStatus getStatus() {
+        return this.status;
+    }
+
+    private enum QuarryStatus {
+        MINING, NO_FUEL, NO_PICKAXE
+    }
+}

@@ -13,14 +13,18 @@ public class Identifiers {
         return of("gui/" + id);
     }
 
+    public static String slot(String path) {
+        return MOD_ID + ":slot/" + path;
+    }
+
     public static class Blocks {
-        public static final String CRAFTING_BENCH = "crafting_bench";
         public static final String DISC_COPIER = "disc_copier";
         public static final String ANDESITE_FURNACE = "andesite_furnace";
         public static final String DIORITE_FURNACE = "diorite_furnace";
         public static final String GRANITE_FURNACE = "granite_furnace";
         public static final String FURNACE = "furnace";
         public static final String EGG = "egg";
+        public static final String QUARRY = "quarry";
     }
 
     public class Items {

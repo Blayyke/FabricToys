@@ -12,6 +12,8 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public abstract class BlockEntityWithInventory extends GenericBlockEntity implements Inventory, BlockEntityClientSerializable {
     private DefaultedList<ItemStack> contents;
 
@@ -38,8 +40,8 @@ public abstract class BlockEntityWithInventory extends GenericBlockEntity implem
     @Override
     public void setInvStack(int int_1, ItemStack itemStack_1) {
         this.contents.set(int_1, itemStack_1);
-        if (!itemStack_1.isEmpty() && itemStack_1.getAmount() > this.getInvMaxStackAmount()) {
-            itemStack_1.setAmount(this.getInvMaxStackAmount());
+        if (!itemStack_1.isEmpty() && itemStack_1.getCount() > this.getInvMaxStackAmount()) {
+            itemStack_1.setCount(this.getInvMaxStackAmount());
         }
 
         this.markDirty();

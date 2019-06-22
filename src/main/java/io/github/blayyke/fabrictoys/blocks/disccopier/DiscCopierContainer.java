@@ -24,7 +24,7 @@ public class DiscCopierContainer extends Container {
         BlockEntity blockEntity = context.run(World::getBlockEntity).orElseThrow(() -> new IllegalStateException("No BlockEntity @ pos"));
 
         if (!(blockEntity instanceof DiscCopierBlockEntity)) {
-            throw new IllegalStateException("BlockEntity @ " + blockEntity.getPos() + " not of right type! Is: " + blockEntity);
+            throw new IllegalStateException("BlockEntity not of right type! Is: " + blockEntity);
         }
         this.copier = (DiscCopierBlockEntity) blockEntity;
         int xOffset = 35;
@@ -82,7 +82,7 @@ public class DiscCopierContainer extends Container {
             itemStack_1 = itemStack_2.copy();
             if (int_1 == 0) {
                 this.context.run((world_1, blockPos_1) -> {
-                    itemStack_2.getItem().onCrafted(itemStack_2, world_1, playerEntity_1);
+                    itemStack_2.getItem().onCraft(itemStack_2, world_1, playerEntity_1);
                 });
                 if (!this.insertItem(itemStack_2, 10, 46, true)) {
                     return ItemStack.EMPTY;
@@ -107,7 +107,7 @@ public class DiscCopierContainer extends Container {
                 slot_1.markDirty();
             }
 
-            if (itemStack_2.getAmount() == itemStack_1.getAmount()) {
+            if (itemStack_2.getCount() == itemStack_1.getCount()) {
                 return ItemStack.EMPTY;
             }
 

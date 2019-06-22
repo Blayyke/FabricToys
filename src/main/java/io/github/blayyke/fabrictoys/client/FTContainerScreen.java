@@ -26,14 +26,22 @@ public abstract class FTContainerScreen<C extends Container> extends AbstractCon
     protected void drawForeground(int int_1, int int_2) {
         this.font.draw(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float) (this.containerHeight - 96 + 2), 0x404040);
         this.font.draw(this.title.getFormattedText(), 28.0F, 6.0F, 0x404040);
+        this.drawTextOverlays();
     }
 
     @Override
-    protected void drawBackground(float var1, int var2, int var3) {
+    protected void drawBackground(float v, int mouseX, int mouseY) {
         GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.minecraft.getTextureManager().bindTexture(backgroundLocation);
         int left = this.left;
         int int_4 = (this.height - this.containerHeight) / 2;
         this.blit(left, int_4, 0, 0, this.containerWidth, this.containerHeight);
+        this.drawOverlays();
+    }
+
+    protected void drawTextOverlays() {
+    }
+
+    protected void drawOverlays() {
     }
 }

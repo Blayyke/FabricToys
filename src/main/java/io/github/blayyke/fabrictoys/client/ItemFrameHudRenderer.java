@@ -22,9 +22,9 @@ public class ItemFrameHudRenderer implements HudRenderer {
                 return;
             }
             TextRenderer font = hud.getFontRenderer();
-            List<Component> tooltipText = stack.getTooltipText(player, TooltipContext.Default.ADVANCED);
+            List<Component> tooltipText = stack.getTooltip(player, TooltipContext.Default.ADVANCED);
 //        System.out.println("Drawing text : " + tooltipText.size());
-            font.drawWithShadow(stack.getDisplayName().getText(), 50f, 50f - font.fontHeight - 1, 0xFFFFFFFF);
+            font.drawWithShadow(stack.getCustomName().getText(), 50f, 50f - font.fontHeight - 1, 0xFFFFFFFF);
             for (int i = 0; i < tooltipText.size(); i++) {
                 Component component = tooltipText.get(i);
                 font.drawWithShadow(new TranslatableComponent(component.getText()).getText(), 50f, 50f + (i * font.fontHeight + 1), 0xFFFFFFFF);
