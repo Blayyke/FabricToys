@@ -77,14 +77,14 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
             fuelTime--;
         }
 
-        if (miningTool.isEmpty()) {
-            // No tool to mine with.
-            this.status = MachineStatus.NO_TOOL;
+        if (!active) {
+            this.status = MachineStatus.INACTIVE;
             return;
         }
 
-        if (!active) {
-            this.status = MachineStatus.INACTIVE;
+        if (miningTool.isEmpty()) {
+            // No tool to mine with.
+            this.status = MachineStatus.NO_TOOL;
             return;
         }
 
@@ -211,7 +211,7 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
 
     private boolean shouldMineBlock(BlockPos.Mutable pos, ItemStack tool) {
         // Do not mine air. Do not mine any block with a hardness less than zero.
-        return !world.isAir(pos) && world.getBlockState(pos).getHardness(world, pos) > 0;
+        return !world.isAir(pos) && world.getFluidState(pos).isEmpty() && world.getBlockState(pos).getHardness(world, pos) > 0;
     }
 
     private ItemStack getTool() {

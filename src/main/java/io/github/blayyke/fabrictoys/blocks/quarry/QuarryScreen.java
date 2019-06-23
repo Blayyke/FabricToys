@@ -20,7 +20,6 @@ public class QuarryScreen extends FTContainerScreen {
 
     public QuarryScreen(Container container, PlayerInventory playerInv) {
         super(BACKGROUND, container, playerInv, new TranslatableComponent(Constants.MOD_ID + ".container.quarry"));
-        //TODO make the screen taller, 3 slots dont fit well.
         this.containerHeight = 133;
     }
 
@@ -30,7 +29,7 @@ public class QuarryScreen extends FTContainerScreen {
 
         QuarryBlockEntity quarry = ((QuarryContainer) container).quarry;
 
-        addButton(new ButtonWidget(this.left + 47, this.top + 17, 36, 20, quarry.isActive() ? "Stop" : "Start", (button) -> {
+        addButton(new ButtonWidget(this.left + containerWidth - 36 - 8, this.top + 17, 36, 20, quarry.isActive() ? "Stop" : "Start", (button) -> {
             PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
             boolean active;
             if (quarry.isActive()) {
@@ -62,7 +61,7 @@ public class QuarryScreen extends FTContainerScreen {
         QuarryBlockEntity quarry = ((QuarryContainer) this.container).quarry;
         MachineStatus status = quarry.getStatus();
 
-        this.font.draw("Status: ", 110, 17, 0x404040);
-        this.font.draw(new TranslatableComponent(status.getDisplayText()).getFormattedText(), 110, 28, status.getDisplayColour());
+        this.font.draw("Status: ", 85, 17, 0x404040);
+        this.font.draw(new TranslatableComponent(status.getDisplayText()).getFormattedText(), 85, 28, status.getDisplayColour());
     }
 }

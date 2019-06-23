@@ -34,7 +34,7 @@ public class QuarryContainer extends Container {
             throw new IllegalStateException("BlockEntity not of right type! Is: " + blockEntity);
         }
         this.quarry = (QuarryBlockEntity) blockEntity;
-        int xOffset = 53;
+        int xOffset = 26;
         int slotY = 19;
 
         addSlot(new Slot(quarry, FUEL_SLOT, 26, slotY) {
@@ -50,7 +50,7 @@ public class QuarryContainer extends Container {
             }
         });
 
-        addSlot(new Slot(quarry, TOOL_SLOT, xOffset + (2 * 18), slotY) {
+        addSlot(new Slot(quarry, TOOL_SLOT, xOffset + (1 * 18), slotY) {
             @Override
             public boolean canInsert(ItemStack itemStack_1) {
                 return itemStack_1.getItem() instanceof PickaxeItem || itemStack_1.getItem() instanceof QuarryDrillItem;
@@ -62,7 +62,7 @@ public class QuarryContainer extends Container {
             }
         });
 
-        addSlot(new Slot(quarry, UPGRADE_SLOT, xOffset + (3 * 18), slotY) {
+        addSlot(new Slot(quarry, UPGRADE_SLOT, xOffset + (2 * 18), slotY) {
             @Override
             public boolean canInsert(ItemStack itemStack_1) {
                 // TODO maybe support other upgrade types.
