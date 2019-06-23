@@ -36,20 +36,20 @@ public class FabricToys {
 
         ServerSidePacketRegistry.INSTANCE.register(QUARRY_UPDATE, (context, buffer) -> {
             BlockPos pos = buffer.readBlockPos();
-            LOGGER.info("Got quarry update packet for " + pos + "!");
-            World world = context.getPlayer().world;
-            BlockState blockState = world.getBlockState(pos);
-            BlockEntity entity = world.getBlockEntity(pos);
+            boolean active = buffer.readBoolean();
+            LOGGER.debug("Got quarry update packet for " + pos + "! (active = " + active + ")");
 
-            System.out.println(blockState.getBlock());
-            System.out.println(entity);
-            QuarryBlockEntity quarry = (QuarryBlockEntity) entity;
+            context.getTaskQueue().execute(() -> {
+                World world = context.getPlayer().world;
+                BlockEntity entity = world.getBlockEntity(pos);
 
-            if (quarry == null) {
-                //TODO this happens whenever the packet is received. It makes it to this point, so the block entity should be there.
-                throw new NullPointerException("Quarry is null!");
-            }
-            quarry.setActive(buffer.readBoolean());
+                if (entity instanceof QuarryBlockEntity) {
+                    QuarryBlockEntity quarry = (QuarryBlockEntity) entity;
+                    quarry.setActive(active);
+                } else {
+                    LOGGER.error("Received " + QUARRY_UPDATE + " packet but the BlockEntity is null!");
+                }
+            });
         });
 
         LOGGER.info("FabricToys initialized!");

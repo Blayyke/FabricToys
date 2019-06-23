@@ -22,6 +22,10 @@ public class PrefixedLogger {
         logger.warn(prefix(s));
     }
 
+    public void debug(String s) {
+        logger.debug(prefix(s));
+    }
+
     private String prefix(String s) {
         return "[" + this.logger.getName() + "] " + s;
     }

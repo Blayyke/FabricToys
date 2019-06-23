@@ -32,7 +32,7 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
     private Inventory inventory;
 
     private MachineStatus status;
-    private boolean active = true; // TODO Default to false, but packet issue needs to be sorted first.
+    private boolean active = false;
 
     public QuarryBlockEntity() {
         super(FTBlockEntities.QUARRY);

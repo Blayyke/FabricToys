@@ -32,7 +32,6 @@ public class QuarryScreen extends FTContainerScreen {
 
         addButton(new ButtonWidget(this.left + 47, this.top + 17, 36, 20, quarry.isActive() ? "Stop" : "Start", (button) -> {
             PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-            buf.writeBlockPos(quarry.getPos());
             boolean active;
             if (quarry.isActive()) {
                 button.setMessage("Start");
@@ -42,6 +41,7 @@ public class QuarryScreen extends FTContainerScreen {
                 active = true;
             }
             quarry.setActive(active);
+            buf.writeBlockPos(quarry.getPos());
             buf.writeBoolean(active);
             ClientSidePacketRegistry.INSTANCE.sendToServer(new CustomPayloadC2SPacket(FabricToys.QUARRY_UPDATE, buf));
         }));
