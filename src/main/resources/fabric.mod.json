@@ -19,7 +19,7 @@
     ]
   },
   "mixins": [
-    "fabrictoys.mixins.json"
+    "mixins.fabrictoys.json"
   ],
   "requires": {
     "fabricloader": ">=0.4.0",

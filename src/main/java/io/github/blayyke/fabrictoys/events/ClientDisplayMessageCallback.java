@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.event.EventFactory;
 
 import java.util.Objects;
 
-// TODO MutableMessageSendContext shouldn't be created outside of this class. One should be provided and it should be modified.
 public interface ClientDisplayMessageCallback {
     Event<ClientDisplayMessageCallback> EVENT = EventFactory.createArrayBacked(ClientDisplayMessageCallback.class,
             listeners -> (ctx, isChat) -> {

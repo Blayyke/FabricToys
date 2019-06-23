@@ -8,12 +8,16 @@
   "block.fabric_toys.quarry": "Quarry",
 
   "item.fabric_toys.blank_disc": "Blank Music Disc",
+  "item.fabric_toys.wrench": "Wrench",
+  "item.fabric_toys.speed_upgrade": "Machine Speed Upgrade",
+
   "fabric_toys.container.disc_copier": "Disc Copier",
   "fabric_toys.container.quarry": "Quarry",
 
   "fabric_toys.cmd.error": "Caught error when running command: %s",
 
-  "fabric_toys.machine_status.no_pickaxe": "No pickaxe",
+  "fabric_toys.machine_status.no_tool": "No tool",
   "fabric_toys.machine_status.no_fuel": "No fuel",
-  "fabric_toys.machine_status.active": "Active"
+  "fabric_toys.machine_status.active": "Active",
+  "fabric_toys.machine_status.inactive": "Inactive"
 }

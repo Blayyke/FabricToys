@@ -12,8 +12,10 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 
 public class QuarryBlock extends GenericBlockWithEntity {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
@@ -26,6 +28,16 @@ public class QuarryBlock extends GenericBlockWithEntity {
     @Override
     public BlockState getPlacementState(ItemPlacementContext itemPlacementContext_1) {
         return this.getDefaultState().with(FACING, itemPlacementContext_1.getPlayerFacing().getOpposite());
+    }
+
+    @Override
+    public void onBlockRemoved(BlockState oldState, World world, BlockPos pos, BlockState newState, boolean boolean_1) {
+        if (newState.getBlock() == this) {
+            // When the block is replaced (wrench will do this) update the corners, as FACING may have changed.
+            ((QuarryBlockEntity) world.getBlockEntity(pos)).updateCorners();
+        }
+
+        super.onBlockRemoved(oldState, world, pos, newState, boolean_1);
     }
 
     @Override

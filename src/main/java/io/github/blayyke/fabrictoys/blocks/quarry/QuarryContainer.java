@@ -1,7 +1,9 @@
 package io.github.blayyke.fabrictoys.blocks.quarry;
 
-import io.github.blayyke.fabrictoys.Identifiers;
+import io.github.blayyke.fabrictoys.Constants;
 import io.github.blayyke.fabrictoys.blocks.FTBlocks;
+import io.github.blayyke.fabrictoys.items.FTItems;
+import io.github.blayyke.fabrictoys.items.QuarryDrillItem;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.container.BlockContext;
@@ -12,15 +14,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
-
 public class QuarryContainer extends Container {
     private final PlayerEntity player;
     private final BlockContext context;
     public final QuarryBlockEntity quarry;
 
     public static final int FUEL_SLOT = 0;
-    public static final int PICKAXE_SLOT = 1;
+    public static final int TOOL_SLOT = 1;
+    public static final int UPGRADE_SLOT = 2;
 
     public QuarryContainer(int syncId, PlayerEntity player, BlockContext context) {
         super(null, syncId);
@@ -34,33 +35,43 @@ public class QuarryContainer extends Container {
         }
         this.quarry = (QuarryBlockEntity) blockEntity;
         int xOffset = 53;
-        int yOffset = 19;
+        int slotY = 19;
 
-        // Blank disc slot
-        addSlot(new Slot(quarry, FUEL_SLOT, 26, yOffset) {
+        addSlot(new Slot(quarry, FUEL_SLOT, 26, slotY) {
             @Override
             public boolean canInsert(ItemStack itemStack_1) {
                 Integer fuel = FuelRegistry.INSTANCE.get(itemStack_1.getItem());
                 return fuel != null && fuel > 0;
             }
 
-            @Nullable
             @Override
             public String getBackgroundSprite() {
-                return Identifiers.slotSprite("coal");
+                return Constants.ofString(Constants.Sprites.COAL);
             }
         });
 
-        addSlot(new Slot(quarry, PICKAXE_SLOT, xOffset + (2 * 18), yOffset) {
+        addSlot(new Slot(quarry, TOOL_SLOT, xOffset + (2 * 18), slotY) {
             @Override
             public boolean canInsert(ItemStack itemStack_1) {
-                return itemStack_1.getItem() instanceof PickaxeItem;
+                return itemStack_1.getItem() instanceof PickaxeItem || itemStack_1.getItem() instanceof QuarryDrillItem;
             }
 
-            @Nullable
             @Override
             public String getBackgroundSprite() {
-                return Identifiers.slotSprite("pickaxe");
+                return Constants.ofString(Constants.Sprites.PICKAXE);
+            }
+        });
+
+        addSlot(new Slot(quarry, UPGRADE_SLOT, xOffset + (3 * 18), slotY) {
+            @Override
+            public boolean canInsert(ItemStack itemStack_1) {
+                // TODO maybe support other upgrade types.
+                return itemStack_1.getItem() == FTItems.SPEED_UPGRADE;
+            }
+
+            @Override
+            public String getBackgroundSprite() {
+                return Constants.ofString(Constants.Sprites.UPGRADE);
             }
         });
 

@@ -7,8 +7,8 @@ import net.minecraft.container.BlockContext;
 import net.minecraft.util.Identifier;
 
 public class FTContainers {
-    public static final Identifier DISC_COPIER = Identifiers.of(Identifiers.Blocks.DISC_COPIER);
-    public static final Identifier QUARRY = Identifiers.of(Identifiers.Blocks.QUARRY);
+    public static final Identifier DISC_COPIER = Constants.of(Constants.Blocks.DISC_COPIER);
+    public static final Identifier QUARRY = Constants.of(Constants.Blocks.QUARRY);
 
     public static void init() {
         ContainerProviderRegistry.INSTANCE.registerFactory(DISC_COPIER, (syncId, identifier, player, buf) -> {
