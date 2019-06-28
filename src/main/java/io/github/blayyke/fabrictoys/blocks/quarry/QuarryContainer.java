@@ -18,34 +18,27 @@
 package io.github.blayyke.fabrictoys.blocks.quarry;
 
 import io.github.blayyke.fabrictoys.Constants;
-import io.github.blayyke.fabrictoys.blocks.FTBlocks;
 import io.github.blayyke.fabrictoys.items.FTItems;
 import io.github.blayyke.fabrictoys.items.QuarryDrillItem;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.container.BlockContext;
 import net.minecraft.container.Container;
 import net.minecraft.container.Slot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PickaxeItem;
-import net.minecraft.world.World;
 
 public class QuarryContainer extends Container {
     private final PlayerEntity player;
-    private final BlockContext context;
     public final QuarryBlockEntity quarry;
 
     public static final int FUEL_SLOT = 0;
     public static final int TOOL_SLOT = 1;
     public static final int UPGRADE_SLOT = 2;
 
-    public QuarryContainer(int syncId, PlayerEntity player, BlockContext context) {
+    public QuarryContainer(int syncId, PlayerEntity player, BlockEntity blockEntity) {
         super(null, syncId);
         this.player = player;
-        this.context = context;
-
-        BlockEntity blockEntity = context.run(World::getBlockEntity).orElseThrow(() -> new IllegalStateException("No BlockEntity @ pos"));
 
         if (!(blockEntity instanceof QuarryBlockEntity)) {
             throw new IllegalStateException("BlockEntity not of right type! Is: " + blockEntity);
@@ -108,7 +101,7 @@ public class QuarryContainer extends Container {
 
     @Override
     public boolean canUse(PlayerEntity player) {
-        return canUse(this.context, player, FTBlocks.QUARRY);
+        return this.quarry.canPlayerUseInv(player);
     }
 
     public int getFuelProgress() {

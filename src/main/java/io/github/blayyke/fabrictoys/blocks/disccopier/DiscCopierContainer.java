@@ -18,28 +18,21 @@
 package io.github.blayyke.fabrictoys.blocks.disccopier;
 
 import io.github.blayyke.fabrictoys.Constants;
-import io.github.blayyke.fabrictoys.blocks.FTBlocks;
 import io.github.blayyke.fabrictoys.items.BlankDiscItem;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.container.BlockContext;
 import net.minecraft.container.Container;
 import net.minecraft.container.Slot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.MusicDiscItem;
-import net.minecraft.world.World;
 
 public class DiscCopierContainer extends Container {
     private final PlayerEntity player;
     private final DiscCopierBlockEntity copier;
-    private final BlockContext context;
 
-    public DiscCopierContainer(int syncId, PlayerEntity player, BlockContext context) {
+    public DiscCopierContainer(int syncId, PlayerEntity player, BlockEntity blockEntity) {
         super(null, syncId);
         this.player = player;
-        this.context = context;
-
-        BlockEntity blockEntity = context.run(World::getBlockEntity).orElseThrow(() -> new IllegalStateException("No BlockEntity @ pos"));
 
         if (!(blockEntity instanceof DiscCopierBlockEntity)) {
             throw new IllegalStateException("BlockEntity not of right type! Is: " + blockEntity);
@@ -98,20 +91,18 @@ public class DiscCopierContainer extends Container {
 
     @Override
     public boolean canUse(PlayerEntity player) {
-        return canUse(this.context, player, FTBlocks.DISC_COPIER);
+        return this.copier.canPlayerUseInv(player);
     }
 
     @Override
-    public ItemStack transferSlot(PlayerEntity playerEntity_1, int int_1) {
+    public ItemStack transferSlot(PlayerEntity player, int int_1) {
         ItemStack itemStack_1 = ItemStack.EMPTY;
         Slot slot_1 = this.slotList.get(int_1);
         if (slot_1 != null && slot_1.hasStack()) {
             ItemStack itemStack_2 = slot_1.getStack();
             itemStack_1 = itemStack_2.copy();
             if (int_1 == 0) {
-                this.context.run((world_1, blockPos_1) -> {
-                    itemStack_2.getItem().onCraft(itemStack_2, world_1, playerEntity_1);
-                });
+                itemStack_2.getItem().onCraft(itemStack_2, player.world, player);
                 if (!this.insertItem(itemStack_2, 10, 46, true)) {
                     return ItemStack.EMPTY;
                 }
@@ -139,9 +130,9 @@ public class DiscCopierContainer extends Container {
                 return ItemStack.EMPTY;
             }
 
-            ItemStack itemStack_3 = slot_1.onTakeItem(playerEntity_1, itemStack_2);
+            ItemStack itemStack_3 = slot_1.onTakeItem(player, itemStack_2);
             if (int_1 == 0) {
-                playerEntity_1.dropItem(itemStack_3, false);
+                player.dropItem(itemStack_3, false);
             }
         }
 

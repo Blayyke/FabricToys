@@ -29,10 +29,10 @@ public class FTContainers {
 
     public static void init() {
         ContainerProviderRegistry.INSTANCE.registerFactory(DISC_COPIER, (syncId, identifier, player, buf) -> {
-            return new DiscCopierContainer(syncId, player, BlockContext.create(player.world, buf.readBlockPos()));
+            return new DiscCopierContainer(syncId, player, player.world.getBlockEntity(buf.readBlockPos()));
         });
         ContainerProviderRegistry.INSTANCE.registerFactory(QUARRY, (syncId, identifier, player, buf) -> {
-            return new QuarryContainer(syncId, player, BlockContext.create(player.world, buf.readBlockPos()));
+            return new QuarryContainer(syncId, player, player.world.getBlockEntity(buf.readBlockPos()));
         });
     }
 }

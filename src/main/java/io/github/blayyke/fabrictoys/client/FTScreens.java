@@ -23,15 +23,14 @@ import io.github.blayyke.fabrictoys.blocks.disccopier.DiscCopierScreen;
 import io.github.blayyke.fabrictoys.blocks.quarry.QuarryContainer;
 import io.github.blayyke.fabrictoys.blocks.quarry.QuarryScreen;
 import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry;
-import net.minecraft.container.BlockContext;
 
 public class FTScreens {
     public static void init() {
         ScreenProviderRegistry.INSTANCE.registerFactory(FTContainers.DISC_COPIER, (syncId, id, player, buf) -> {
-            return new DiscCopierScreen(new DiscCopierContainer(syncId, player, BlockContext.create(player.world, buf.readBlockPos())), player.inventory);
+            return new DiscCopierScreen(new DiscCopierContainer(syncId, player, player.world.getBlockEntity(buf.readBlockPos())), player.inventory);
         });
         ScreenProviderRegistry.INSTANCE.registerFactory(FTContainers.QUARRY, (syncId, id, player, buf) -> {
-            return new QuarryScreen(new QuarryContainer(syncId, player, BlockContext.create(player.world, buf.readBlockPos())), player.inventory);
+            return new QuarryScreen(new QuarryContainer(syncId, player, player.world.getBlockEntity(buf.readBlockPos())), player.inventory);
         });
     }
 }
