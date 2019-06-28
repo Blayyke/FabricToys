@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_top",
   "textures": {
-    "top": "block/jukebox_top",
+    "top": "fabric_toys:block/disc_copier_top",
     "side": "block/jukebox_side"
   }
 }

@@ -7,7 +7,7 @@
   "authors": [
     "Blayyke"
   ],
-  "license": "CC0-1.0",
+  "license": "GPL-3.0",
   "icon": "assets/fabrictoys/icon.png",
   "environment": "*",
   "entrypoints": {

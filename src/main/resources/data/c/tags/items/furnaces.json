@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "fabric_toys:andesite_furnace",
+    "fabric_toys:diorite_furnace",
+    "fabric_toys:granite_furnace",
+    "minecraft:furnace"
+  ]
+}

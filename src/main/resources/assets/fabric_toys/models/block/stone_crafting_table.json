@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "fabric_toys:block/stone_crafting_table_front",
+    "down": "block/stone",
+    "up": "fabric_toys:block/stone_crafting_table_top",
+    "north": "fabric_toys:block/stone_crafting_table_front",
+    "east": "fabric_toys:block/stone_crafting_table_side",
+    "south": "fabric_toys:block/stone_crafting_table_side",
+    "west": "fabric_toys:block/stone_crafting_table_front"
+  }
+}

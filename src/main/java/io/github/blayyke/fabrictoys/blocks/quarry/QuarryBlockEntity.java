@@ -1,3 +1,20 @@
+/*
+ *     This file is part of FabricToys.
+ *
+ *     FabricToys is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     FabricToys is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with FabricToys.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package io.github.blayyke.fabrictoys.blocks.quarry;
 
 import io.github.blayyke.fabrictoys.InventoryUtils;
@@ -115,8 +132,11 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
                         this.inventory = null;
                     }
                 }
+            }
 
-                tryMineBlock(miningTool);
+            if (!tryMineBlock(miningTool)) {
+                // There were no blocks to mine in the quarries area, deactivate it so it doesn't just keep looping forever. If a block is place
+                active = false;
             }
         }
     }
@@ -138,7 +158,8 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
         }
     }
 
-    private void tryMineBlock(ItemStack tool) {
+
+    private boolean tryMineBlock(ItemStack tool) {
         BlockPos.Mutable pos = new BlockPos.Mutable();
         // Loop Y first, so it goes top to bottom.
         for (int y = corner2.getY(); y > corner1.getY(); y--) {
@@ -146,28 +167,32 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
                 for (int z = corner1.getZ(); z < corner2.getZ(); z++) {
                     pos.set(x, y, z);
                     if (shouldMineBlock(pos, tool)) {
-                        BlockState block = world.getBlockState(pos);
-                        world.clearBlockState(pos, true);
-                        tool.damage(1, world.random, null);
-                        List<ItemStack> stacks = block.getDroppedStacks(new LootContext.Builder((ServerWorld) world)
-                                .put(LootContextParameters.TOOL, tool)
-                                .put(LootContextParameters.POSITION, pos)
-                        );
-                        if (tool.getDamage() >= tool.getMaxDamage()) {
-                            System.out.println("Gone through a pickaxe!");
-                            this.setInvStack(QuarryContainer.TOOL_SLOT, ItemStack.EMPTY);
+                        if (!world.isClient) {
+                            BlockState block = world.getBlockState(pos);
+                            world.clearBlockState(pos, true);
+                            tool.damage(1, world.random, null);
+                            List<ItemStack> stacks = block.getDroppedStacks(new LootContext.Builder((ServerWorld) world)
+                                    .put(LootContextParameters.TOOL, tool)
+                                    .put(LootContextParameters.POSITION, pos)
+                            );
+                            if (tool.getDamage() >= tool.getMaxDamage()) {
+                                System.out.println("Gone through a pickaxe!");
+                                this.setInvStack(QuarryContainer.TOOL_SLOT, ItemStack.EMPTY);
+                            }
+
+                            for (ItemStack stack : stacks) {
+                                storeItem(stack);
+                            }
                         }
 
-                        for (ItemStack stack : stacks) {
-                            storeItem(stack);
-                        }
-//                        System.out.println("Mined block @ " + pos + ".");
-
-                        return;
+                        return true;
                     }
                 }
             }
+
         }
+
+        return false;
     }
 
     private void storeItem(ItemStack stack) {
@@ -175,6 +200,7 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
             // Inv above, add to inv.
             //TODO this does not work with double chests. Fills first half then aborts and starts throwing items.
             if (!InventoryUtils.isInvFull(inventory)) {
+                //TODO Once the inventory fills up, it will start throwing items instead of moving on to the next chest.
                 for (int i = 0; i < inventory.getInvSize(); i++) {
                     ItemStack invStack = inventory.getInvStack(i);
                     if (invStack.isEmpty()) {

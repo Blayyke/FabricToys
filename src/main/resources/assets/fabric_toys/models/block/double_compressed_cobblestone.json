@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "fabric_toys:block/double_compressed_cobblestone"
+  }
+}

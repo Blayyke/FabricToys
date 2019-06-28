@@ -1,3 +1,20 @@
+/*
+ *     This file is part of FabricToys.
+ *
+ *     FabricToys is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     FabricToys is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with FabricToys.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package io.github.blayyke.fabrictoys.mixins;
 
 import io.github.blayyke.fabrictoys.FabricToys;
@@ -24,10 +41,10 @@ public class ServerPlayNetworkHandlerMixin {
     public ServerPlayerEntity player;
 
 
-    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayNetworkHandler;disconnect(Lnet/minecraft/network/chat/Component;)V", shift = At.Shift.BEFORE))
+    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayNetworkHandler;disconnect(Lnet/minecraft/text/Text;)V", shift = At.Shift.BEFORE))
     public void ft_beforeDisconnect(CallbackInfo i) {
         if (FabricToys.CONFIG.logOnTimeout) {
-            LOGGER.info("Player " + player.getName().getText() + " timed out. (No keepalive received for " + FabricToys.CONFIG.keepaliveTimeout + "ms.)");
+            LOGGER.info("Player " + player.getName().asString() + " timed out. (No keepalive received for " + FabricToys.CONFIG.keepaliveTimeout + "ms.)");
         }
     }
 

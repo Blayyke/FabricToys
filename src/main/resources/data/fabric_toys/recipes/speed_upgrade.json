@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "AGA",
+    " A "
+  ],
+  "key": {
+    "A": {
+      "item": "iron_ingot"
+    },
+    "G": {
+      "item": "minecraft:emerald"
+    }
+  },
+  "result": {
+    "item": "fabric_toys:speed_upgrade"
+  }
+}

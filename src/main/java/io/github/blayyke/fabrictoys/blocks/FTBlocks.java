@@ -1,6 +1,25 @@
+/*
+ *     This file is part of FabricToys.
+ *
+ *     FabricToys is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     FabricToys is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with FabricToys.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package io.github.blayyke.fabrictoys.blocks;
 
 import io.github.blayyke.fabrictoys.Constants;
+import io.github.blayyke.fabrictoys.blocks.chest.FTChestBlock;
+import io.github.blayyke.fabrictoys.blocks.craftingtable.FTCraftingTableBlock;
 import io.github.blayyke.fabrictoys.blocks.disccopier.DiscCopierBlock;
 import io.github.blayyke.fabrictoys.blocks.furnace.FTFurnaceBlock;
 import io.github.blayyke.fabrictoys.blocks.quarry.QuarryBlock;
@@ -19,11 +38,19 @@ public class FTBlocks {
     public static final Block DIORITE_FURNACE = register(Constants.Blocks.DIORITE_FURNACE, new FTFurnaceBlock(FabricBlockSettings.copy(Blocks.FURNACE).build()));
     public static final Block GRANITE_FURNACE = register(Constants.Blocks.GRANITE_FURNACE, new FTFurnaceBlock(FabricBlockSettings.copy(Blocks.FURNACE).build()));
 
-    public static final Block BIRCH_CHEST = register(Constants.Blocks.BIRCH_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(),
-            Constants.of("textures/entity/chest/birch.png"), Constants.of("textures/entity/chest/birch_double.png")));
+    public static final Block BIRCH_CHEST = register(Constants.Blocks.BIRCH_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "birch"));
+    public static final Block ACACIA_CHEST = register(Constants.Blocks.ACACIA_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "acacia"));
+    public static final Block DARK_OAK_CHEST = register(Constants.Blocks.DARK_OAK_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "dark_oak"));
+    public static final Block SPRUCE_CHEST = register(Constants.Blocks.SPRUCE_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "spruce"));
+    public static final Block JUNGLE_CHEST = register(Constants.Blocks.JUNGLE_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "jungle"));
+
+    public static final Block STONE_CRAFTING_TABLE = register(Constants.Blocks.STONE_CRAFTING_TABLE, new FTCraftingTableBlock(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).build()));
 
     public static final Block QUARRY = register(Constants.Blocks.QUARRY, new QuarryBlock(FabricBlockSettings.of(Material.METAL).breakByTool(FabricToolTags.PICKAXES, 1).build()));
     public static final Block EGG = register(Constants.Blocks.EGG, new EggBlock(FabricBlockSettings.of(Material.EGG).ticksRandomly().hardness(0.5F).build()));
+    public static final Block COMPRESSED_COBBLESTONE = register(Constants.Blocks.COMPRESSED_COBBLESTONE, new Block(FabricBlockSettings.copy(Blocks.COBBLESTONE).hardness(2.5F).build()));
+    public static final Block DOUBLE_COMPRESSED_COBBLESTONE = register(Constants.Blocks.DOUBLE_COMPRESSED_COBBLESTONE, new Block(FabricBlockSettings.copy(Blocks.COBBLESTONE).hardness(3.0F).build()));
+    public static final Block TRIPLE_COMPRESSED_COBBLESTONE = register(Constants.Blocks.TRIPLE_COMPRESSED_COBBLESTONE, new Block(FabricBlockSettings.copy(Blocks.COBBLESTONE).hardness(4.0F).build()));
 
     private static <B extends Block> B register(String id, B block) {
         return Registry.register(Registry.BLOCK, new Identifier(Constants.MOD_ID, id), block);

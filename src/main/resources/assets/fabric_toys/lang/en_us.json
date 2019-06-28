@@ -1,15 +1,33 @@
 {
   "itemGroup.fabric_toys.item_group": "FabricToys Items",
 
-  "block.fabric_toys.disc_copier": "Disc Copier",
   "block.fabric_toys.andesite_furnace": "Andesite Furnace",
   "block.fabric_toys.granite_furnace": "Granite Furnace",
   "block.fabric_toys.diorite_furnace": "Diorite Furnace",
+
+  "block.fabric_toys.acacia_chest": "Acacia Chest",
+  "block.fabric_toys.birch_chest": "Birch Chest",
+  "block.fabric_toys.dark_oak_chest": "Dark Oak Chest",
+  "block.fabric_toys.spruce_chest": "Spruce Chest",
+  "block.fabric_toys.jungle_chest": "Jungle Chest",
+
+  "block.fabric_toys.stone_crafting_table": "Stone Crafting Table",
+  "block.fabric_toys.disc_copier": "Disc Copier",
   "block.fabric_toys.quarry": "Quarry",
+  "block.fabric_toys.compressed_cobblestone": "Compressed Cobblestone (x9)",
+  "block.fabric_toys.double_compressed_cobblestone": "Compressed Cobblestone (x81)",
+  "block.fabric_toys.triple_compressed_cobblestone": "Compressed Cobblestone (x729)",
 
   "item.fabric_toys.blank_disc": "Blank Music Disc",
   "item.fabric_toys.wrench": "Wrench",
+  "item.fabric_toys.sleeping_bag": "Sleeping Bag - BROKEN, DO NOT USE",
   "item.fabric_toys.speed_upgrade": "Machine Speed Upgrade",
+
+  "item.fabric_toys.wooden_quarry_drill": "Wooden Quarry Drill",
+  "item.fabric_toys.stone_quarry_drill": "Stone Quarry Drill",
+  "item.fabric_toys.iron_quarry_drill": "Iron Quarry Drill",
+  "item.fabric_toys.gold_quarry_drill": "Gold Quarry Drill",
+  "item.fabric_toys.diamond_quarry_drill": "Diamond Quarry Drill",
 
   "fabric_toys.container.disc_copier": "Disc Copier",
   "fabric_toys.container.quarry": "Quarry",

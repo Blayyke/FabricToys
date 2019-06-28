@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "fabric_toys:dark_oak_chest",
+    "minecraft:chest",
+    "fabric_toys:acacia_chest",
+    "fabric_toys:birch_chest",
+    "fabric_toys:jungle_chest",
+    "fabric_toys:spruce_chest"
+  ]
+}

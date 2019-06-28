@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "fabric_toys:compressed_cobblestone"
+    }
+  },
+  "result": {
+    "item": "fabric_toys:double_compressed_cobblestone"
+  }
+}

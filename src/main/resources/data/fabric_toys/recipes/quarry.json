@@ -1,19 +1,25 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "DID",
-    "IPI",
-    "DID"
+    "DPD",
+    "IRI",
+    "ICI"
   ],
   "key": {
-    "D": {
-      "item": "minecraft:diamond"
-    },
     "I": {
-      "item": "minecraft:iron_ingot"
+      "item": "minecraft:iron_block"
     },
     "P": {
-      "item": "minecraft:diamond_pickaxe"
+      "item": "minecraft:stonecutter"
+    },
+    "C": {
+      "item": "minecraft:compass"
+    },
+    "R": {
+      "item": "minecraft:redstone_torch"
+    },
+    "D": {
+      "item": "minecraft:diamond"
     }
   },
   "result": {

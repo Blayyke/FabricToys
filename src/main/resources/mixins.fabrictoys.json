@@ -4,12 +4,14 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "CampfireMixin",
-    "ClientPlayerMixin",
-    "EggItemMixin",
-    "InGameHudMixin",
-    "ServerPlayNetworkHandlerMixin",
     "ChestBlockEntityMixin",
-    "ChestBlockEntityRendererMixin"
+    "ChestBlockEntityRendererMixin",
+    "ClientPlayerMixin",
+    "CraftingTableContainerMixin",
+    "EggItemMixin",
+    "PlayerEntityMixin",
+    "InGameHudMixin",
+    "ServerPlayNetworkHandlerMixin"
   ],
   "client": [
     "ClientPlayNetworkHandlerMixin",

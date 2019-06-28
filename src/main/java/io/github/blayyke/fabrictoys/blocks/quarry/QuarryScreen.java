@@ -1,3 +1,20 @@
+/*
+ *     This file is part of FabricToys.
+ *
+ *     FabricToys is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     FabricToys is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with FabricToys.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package io.github.blayyke.fabrictoys.blocks.quarry;
 
 import io.github.blayyke.fabrictoys.Constants;
@@ -9,8 +26,8 @@ import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.container.Container;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.network.packet.CustomPayloadC2SPacket;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
 
@@ -19,7 +36,7 @@ public class QuarryScreen extends FTContainerScreen {
     private static final Identifier FURNACE_TEX = new Identifier("textures/gui/container/furnace.png");
 
     public QuarryScreen(Container container, PlayerInventory playerInv) {
-        super(BACKGROUND, container, playerInv, new TranslatableComponent(Constants.MOD_ID + ".container.quarry"));
+        super(BACKGROUND, container, playerInv, new TranslatableText(Constants.MOD_ID + ".container.quarry"));
         this.containerHeight = 133;
     }
 
@@ -62,6 +79,6 @@ public class QuarryScreen extends FTContainerScreen {
         MachineStatus status = quarry.getStatus();
 
         this.font.draw("Status: ", 85, 17, 0x404040);
-        this.font.draw(new TranslatableComponent(status.getDisplayText()).getFormattedText(), 85, 28, status.getDisplayColour());
+        this.font.draw(new TranslatableText(status.getDisplayText()).asFormattedString(), 85, 28, status.getDisplayColour());
     }
 }

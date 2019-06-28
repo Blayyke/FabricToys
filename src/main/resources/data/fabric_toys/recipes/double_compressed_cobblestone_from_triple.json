@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "fabric_toys:triple_compressed_cobblestone"
+    }
+  ],
+  "result": {
+    "item": "fabric_toys:double_compressed_cobblestone",
+    "count": 9
+  }
+}

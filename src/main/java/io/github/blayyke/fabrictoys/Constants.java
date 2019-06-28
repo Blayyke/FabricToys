@@ -1,3 +1,20 @@
+/*
+ *     This file is part of FabricToys.
+ *
+ *     FabricToys is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     FabricToys is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with FabricToys.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package io.github.blayyke.fabrictoys;
 
 import net.minecraft.util.Identifier;
@@ -25,29 +42,40 @@ public class Constants {
         public static final String GRANITE_FURNACE = "granite_furnace";
         public static final String FURNACE = "furnace";
 
+        public static final String ACACIA_CHEST = "acacia_chest";
         public static final String BIRCH_CHEST = "birch_chest";
         public static final String CHEST = "chest";
+        public static final String DARK_OAK_CHEST = "dark_oak_chest";
+        public static final String SPRUCE_CHEST = "spruce_chest";
+        public static final String JUNGLE_CHEST = "jungle_chest";
 
         public static final String EGG = "egg";
         public static final String QUARRY = "quarry";
 
+        public static final String STONE_CRAFTING_TABLE = "stone_crafting_table";
+        public static final String COMPRESSED_COBBLESTONE = "compressed_cobblestone";
+        public static final String DOUBLE_COMPRESSED_COBBLESTONE = "double_compressed_cobblestone";
+        public static final String TRIPLE_COMPRESSED_COBBLESTONE = "triple_compressed_cobblestone";
     }
 
     public class Items {
         public static final String BLANK_DISC = "blank_disc";
         public static final String WRENCH = "wrench";
+        public static final String SPEED_UPGRADE = "speed_upgrade";
+        public static final String SLEEPING_BAG = "sleeping_bag";
+
         public static final String WOODEN_QUARRY_DRILL = "wooden_quarry_drill";
         public static final String STONE_QUARRY_DRILL = "stone_quarry_drill";
         public static final String IRON_QUARRY_DRILL = "iron_quarry_drill";
         public static final String GOLD_QUARRY_DRILL = "gold_quarry_drill";
         public static final String DIAMOND_QUARRY_DRILL = "diamond_quarry_drill";
-        public static final String SPEED_UPGRADE = "speed_upgrade";
     }
 
     public class Sprites {
         public static final String PICKAXE = "slot/pickaxe";
         public static final String COAL = "slot/coal";
         public static final String UPGRADE = "slot/upgrade";
+        public static final String DISC = "slot/disc";
     }
 
     public class GuiColors {
