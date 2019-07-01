@@ -27,20 +27,21 @@ import net.minecraft.util.registry.Registry;
 public class FTItems {
     public static ItemGroup GROUP = FabricItemGroupBuilder.create(new Identifier(Constants.MOD_ID, "item_group")).icon(() -> new ItemStack(FTBlocks.ANDESITE_FURNACE)).build();
 
-    public static final BlockItem DISC_COPIER = register(Constants.Blocks.DISC_COPIER, new BlockItem(FTBlocks.DISC_COPIER, new Item.Settings().group(GROUP)));
-    public static final BlockItem QUARRY = register(Constants.Blocks.QUARRY, new BlockItem(FTBlocks.QUARRY, new Item.Settings().group(GROUP)));
-
     public static final BlockItem ANDESITE_FURNACE = register(Constants.Blocks.ANDESITE_FURNACE, new BlockItem(FTBlocks.ANDESITE_FURNACE, new Item.Settings().group(GROUP)));
     public static final BlockItem DIORITE_FURNACE = register(Constants.Blocks.DIORITE_FURNACE, new BlockItem(FTBlocks.DIORITE_FURNACE, new Item.Settings().group(GROUP)));
     public static final BlockItem GRANITE_FURNACE = register(Constants.Blocks.GRANITE_FURNACE, new BlockItem(FTBlocks.GRANITE_FURNACE, new Item.Settings().group(GROUP)));
 
-    public static final BlockItem STONE_CRAFTING_TABLE = register(Constants.Blocks.STONE_CRAFTING_TABLE, new BlockItem(FTBlocks.STONE_CRAFTING_TABLE, new Item.Settings().group(GROUP)));
 
     public static final BlockItem ACACIA_CHEST = register(Constants.Blocks.ACACIA_CHEST, new BlockItem(FTBlocks.ACACIA_CHEST, new Item.Settings().group(GROUP)));
     public static final BlockItem BIRCH_CHEST = register(Constants.Blocks.BIRCH_CHEST, new BlockItem(FTBlocks.BIRCH_CHEST, new Item.Settings().group(GROUP)));
     public static final BlockItem DARK_OAK_CHEST = register(Constants.Blocks.DARK_OAK_CHEST, new BlockItem(FTBlocks.DARK_OAK_CHEST, new Item.Settings().group(GROUP)));
     public static final BlockItem SPRUCE_CHEST = register(Constants.Blocks.SPRUCE_CHEST, new BlockItem(FTBlocks.SPRUCE_CHEST, new Item.Settings().group(GROUP)));
     public static final BlockItem JUNGLE_CHEST = register(Constants.Blocks.JUNGLE_CHEST, new BlockItem(FTBlocks.JUNGLE_CHEST, new Item.Settings().group(GROUP)));
+
+    public static final BlockItem STONE_CRAFTING_TABLE = register(Constants.Blocks.STONE_CRAFTING_TABLE, new BlockItem(FTBlocks.STONE_CRAFTING_TABLE, new Item.Settings().group(GROUP)));
+    public static final BlockItem QUARRY = register(Constants.Blocks.QUARRY, new BlockItem(FTBlocks.QUARRY, new Item.Settings().group(GROUP)));
+    public static final BlockItem DISC_COPIER = register(Constants.Blocks.DISC_COPIER, new BlockItem(FTBlocks.DISC_COPIER, new Item.Settings().group(GROUP)));
+    public static final BlockItem COBBLESTONE_GENERATOR= register(Constants.Blocks.COBBLESTONE_GENERATOR, new BlockItem(FTBlocks.COBBLESTONE_GENERATOR, new Item.Settings().group(GROUP)));
 
     public static final BlockItem COMPRESSED_COBBLESTONE = register(Constants.Blocks.COMPRESSED_COBBLESTONE, new BlockItem(FTBlocks.COMPRESSED_COBBLESTONE, new Item.Settings().group(GROUP)));
     public static final BlockItem DOUBLE_COMPRESSED_COBBLESTONE = register(Constants.Blocks.DOUBLE_COMPRESSED_COBBLESTONE, new BlockItem(FTBlocks.DOUBLE_COMPRESSED_COBBLESTONE, new Item.Settings().group(GROUP)));
@@ -61,7 +62,6 @@ public class FTItems {
     //tODO tools?
     //todo armors?
     //todo plants?
-
 
     public static <I extends Item> I register(String id, I item) {
         return Registry.register(Registry.ITEM, new Identifier(Constants.MOD_ID, id), item);

@@ -145,7 +145,6 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
         int speedUpgradeCount = getUpgrades().getCount();
 
         if (speedUpgradeCount >= 4) {
-            // Should never be above 4, but if it is we might as well treat it as 4 instead of treating it as having none.
             return 10;
         } else if (speedUpgradeCount == 3) {
             return 15;
@@ -189,7 +188,6 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
                     }
                 }
             }
-
         }
 
         return false;

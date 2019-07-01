@@ -19,6 +19,7 @@ package io.github.blayyke.fabrictoys.blocks;
 
 import io.github.blayyke.fabrictoys.Constants;
 import io.github.blayyke.fabrictoys.blocks.chest.FTChestBlockEntity;
+import io.github.blayyke.fabrictoys.blocks.cobblegen.CobblestoneGeneratorBlockEntity;
 import io.github.blayyke.fabrictoys.blocks.disccopier.DiscCopierBlockEntity;
 import io.github.blayyke.fabrictoys.blocks.furnace.FTFurnaceBlockEntity;
 import io.github.blayyke.fabrictoys.blocks.quarry.QuarryBlockEntity;
@@ -36,6 +37,7 @@ public class FTBlockEntities {
     public static final BlockEntityType<?> FURNACE = register(Constants.Blocks.FURNACE, FTFurnaceBlockEntity::new, ANDESITE_FURNACE, DIORITE_FURNACE, GRANITE_FURNACE);
     public static final BlockEntityType<?> CHEST = register(Constants.Blocks.CHEST, FTChestBlockEntity::new, ACACIA_CHEST, BIRCH_CHEST, DARK_OAK_CHEST, JUNGLE_CHEST, SPRUCE_CHEST);
     public static final BlockEntityType<?> QUARRY = register(Constants.Blocks.QUARRY, QuarryBlockEntity::new, FTBlocks.QUARRY);
+    public static final BlockEntityType<?> COBBLESTONE_GENERATOR = register(Constants.Blocks.COBBLESTONE_GENERATOR, CobblestoneGeneratorBlockEntity::new, FTBlocks.COBBLESTONE_GENERATOR);
 
     private static <K extends BlockEntity> BlockEntityType<K> register(String id, Supplier<K> entitySupplier, Block... blocks) {
         // ... .build(null) <- null is datafixer, they don't work with mods.

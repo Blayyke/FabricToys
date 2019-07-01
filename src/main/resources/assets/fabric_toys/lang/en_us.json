@@ -14,6 +14,8 @@
   "block.fabric_toys.stone_crafting_table": "Stone Crafting Table",
   "block.fabric_toys.disc_copier": "Disc Copier",
   "block.fabric_toys.quarry": "Quarry",
+  "block.fabric_toys.cobblestone_generator": "Cobblestone Generator",
+
   "block.fabric_toys.compressed_cobblestone": "Compressed Cobblestone (x9)",
   "block.fabric_toys.double_compressed_cobblestone": "Compressed Cobblestone (x81)",
   "block.fabric_toys.triple_compressed_cobblestone": "Compressed Cobblestone (x729)",

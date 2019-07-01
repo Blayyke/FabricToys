@@ -42,11 +42,14 @@ public abstract class GenericBlockWithEntity extends Block implements BlockEntit
     public boolean activate(BlockState block, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hitResult) {
         ((GenericBlockEntity) world.getBlockEntity(pos)).activate(block, player, hand, hitResult, world.isClient);
 
-        if (!world.isClient && getContainerId() != null) {
-            ContainerProviderRegistry.INSTANCE.openContainer(getContainerId(), player, buf -> buf.writeBlockPos(pos));
+        if (getContainerId() != null) {
+            if (!world.isClient) {
+                ContainerProviderRegistry.INSTANCE.openContainer(getContainerId(), player, buf -> buf.writeBlockPos(pos));
+            }
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     @Override

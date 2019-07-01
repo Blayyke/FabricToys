@@ -35,7 +35,7 @@ public class Constants {
     }
 
     public static class Blocks {
-        public static final String DISC_COPIER = "disc_copier";
+        public static final String EGG = "egg";
 
         public static final String ANDESITE_FURNACE = "andesite_furnace";
         public static final String DIORITE_FURNACE = "diorite_furnace";
@@ -49,10 +49,11 @@ public class Constants {
         public static final String SPRUCE_CHEST = "spruce_chest";
         public static final String JUNGLE_CHEST = "jungle_chest";
 
-        public static final String EGG = "egg";
+        public static final String DISC_COPIER = "disc_copier";
         public static final String QUARRY = "quarry";
-
         public static final String STONE_CRAFTING_TABLE = "stone_crafting_table";
+        public static final String COBBLESTONE_GENERATOR = "cobblestone_generator";
+
         public static final String COMPRESSED_COBBLESTONE = "compressed_cobblestone";
         public static final String DOUBLE_COMPRESSED_COBBLESTONE = "double_compressed_cobblestone";
         public static final String TRIPLE_COMPRESSED_COBBLESTONE = "triple_compressed_cobblestone";

@@ -19,6 +19,7 @@ package io.github.blayyke.fabrictoys.blocks;
 
 import io.github.blayyke.fabrictoys.Constants;
 import io.github.blayyke.fabrictoys.blocks.chest.FTChestBlock;
+import io.github.blayyke.fabrictoys.blocks.cobblegen.CobblestoneGeneratorBlock;
 import io.github.blayyke.fabrictoys.blocks.craftingtable.FTCraftingTableBlock;
 import io.github.blayyke.fabrictoys.blocks.disccopier.DiscCopierBlock;
 import io.github.blayyke.fabrictoys.blocks.furnace.FTFurnaceBlock;
@@ -32,8 +33,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class FTBlocks {
-    public static final Block DISC_COPIER = register(Constants.Blocks.DISC_COPIER, new DiscCopierBlock(FabricBlockSettings.copy(Blocks.JUKEBOX).build()));
-
     public static final Block ANDESITE_FURNACE = register(Constants.Blocks.ANDESITE_FURNACE, new FTFurnaceBlock(FabricBlockSettings.copy(Blocks.FURNACE).build()));
     public static final Block DIORITE_FURNACE = register(Constants.Blocks.DIORITE_FURNACE, new FTFurnaceBlock(FabricBlockSettings.copy(Blocks.FURNACE).build()));
     public static final Block GRANITE_FURNACE = register(Constants.Blocks.GRANITE_FURNACE, new FTFurnaceBlock(FabricBlockSettings.copy(Blocks.FURNACE).build()));
@@ -45,8 +44,10 @@ public class FTBlocks {
     public static final Block JUNGLE_CHEST = register(Constants.Blocks.JUNGLE_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "jungle"));
 
     public static final Block STONE_CRAFTING_TABLE = register(Constants.Blocks.STONE_CRAFTING_TABLE, new FTCraftingTableBlock(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).build()));
-
     public static final Block QUARRY = register(Constants.Blocks.QUARRY, new QuarryBlock(FabricBlockSettings.of(Material.METAL).breakByTool(FabricToolTags.PICKAXES, 1).build()));
+    public static final Block DISC_COPIER = register(Constants.Blocks.DISC_COPIER, new DiscCopierBlock(FabricBlockSettings.copy(Blocks.JUKEBOX).build()));
+    public static final Block COBBLESTONE_GENERATOR = register(Constants.Blocks.COBBLESTONE_GENERATOR, new CobblestoneGeneratorBlock(FabricBlockSettings.copy(QUARRY).build()));
+
     public static final Block EGG = register(Constants.Blocks.EGG, new EggBlock(FabricBlockSettings.of(Material.EGG).ticksRandomly().hardness(0.5F).build()));
     public static final Block COMPRESSED_COBBLESTONE = register(Constants.Blocks.COMPRESSED_COBBLESTONE, new Block(FabricBlockSettings.copy(Blocks.COBBLESTONE).hardness(2.5F).build()));
     public static final Block DOUBLE_COMPRESSED_COBBLESTONE = register(Constants.Blocks.DOUBLE_COMPRESSED_COBBLESTONE, new Block(FabricBlockSettings.copy(Blocks.COBBLESTONE).hardness(3.0F).build()));

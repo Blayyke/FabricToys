@@ -33,10 +33,10 @@ public abstract class FTContainerScreen<C extends Container> extends AbstractCon
     }
 
     @Override
-    public void render(int int_1, int int_2, float float_1) {
+    public void render(int mouseX, int mouseY, float float_1) {
         renderBackground();
-        super.render(int_1, int_2, float_1);
-        this.drawMouseoverTooltip(int_1, int_2);
+        super.render(mouseX, mouseY, float_1);
+        this.drawMouseoverTooltip(mouseX, mouseY);
     }
 
     @Override
