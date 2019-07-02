@@ -11,7 +11,7 @@ import net.minecraft.util.math.Direction;
 import javax.annotation.Nullable;
 
 public class CobblestoneGeneratorBlockEntity extends BlockEntityWithInventory implements Tickable, SidedInventory {
-    private static final int PRODUCTION_DELAY = 30; // 1.5 Seconds
+    private Integer productionDelay;
     private int elapsedTicks;
 
     public CobblestoneGeneratorBlockEntity() {
@@ -25,8 +25,12 @@ public class CobblestoneGeneratorBlockEntity extends BlockEntityWithInventory im
 
     @Override
     public void tick() {
+        if (productionDelay == null) {
+            productionDelay = ((CobblestoneGeneratorBlock) world.getBlockState(pos).getBlock()).getProductionDelay();
+        }
+
         elapsedTicks++;
-        if (elapsedTicks >= PRODUCTION_DELAY) {
+        if (elapsedTicks >= productionDelay) {
             elapsedTicks = 0;
             produceCobblestone();
         }

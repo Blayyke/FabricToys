@@ -17,11 +17,13 @@
 
 package io.github.blayyke.fabrictoys.blocks.disccopier;
 
+import io.github.blayyke.fabrictoys.Constants;
 import io.github.blayyke.fabrictoys.FTContainers;
 import io.github.blayyke.fabrictoys.blocks.GenericBlockEntity;
 import io.github.blayyke.fabrictoys.blocks.GenericBlockWithEntity;
 import net.minecraft.block.Blocks;
 import net.minecraft.tag.BlockTags;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -39,5 +41,10 @@ public class DiscCopierBlock extends GenericBlockWithEntity {
     @Override
     protected Identifier getContainerId() {
         return FTContainers.DISC_COPIER;
+    }
+
+    @Override
+    protected TranslatableText getTooltip() {
+        return new TranslatableText(Constants.tooltip(Constants.Blocks.DISC_COPIER));
     }
 }

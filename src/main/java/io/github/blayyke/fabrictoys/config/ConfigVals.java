@@ -34,4 +34,7 @@ public class ConfigVals {
 
     @Comment("Show information about the item stored in the item frame you are looking at. (client only)")
     public boolean enableItemFrameInfo = true;
+
+    @Comment("Should splash instant damage potions kill grass & plants it touches.")
+    public boolean enablePotionTweak = true;
 }

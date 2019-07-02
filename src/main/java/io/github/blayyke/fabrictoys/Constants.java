@@ -34,6 +34,10 @@ public class Constants {
         return of("gui/" + path);
     }
 
+    public static String tooltip(String path) {
+        return ofString("tooltip." + path);
+    }
+
     public static class Blocks {
         public static final String EGG = "egg";
 
@@ -53,6 +57,10 @@ public class Constants {
         public static final String QUARRY = "quarry";
         public static final String STONE_CRAFTING_TABLE = "stone_crafting_table";
         public static final String COBBLESTONE_GENERATOR = "cobblestone_generator";
+        public static final String COBBLESTONE_GENERATOR_TIER_1 = COBBLESTONE_GENERATOR + "_tier_1";
+        public static final String COBBLESTONE_GENERATOR_TIER_2 = COBBLESTONE_GENERATOR + "_tier_2";
+        public static final String COBBLESTONE_GENERATOR_TIER_3 = COBBLESTONE_GENERATOR + "_tier_3";
+        public static final String COBBLESTONE_GENERATOR_TIER_4 = COBBLESTONE_GENERATOR + "_tier_4";
 
         public static final String COMPRESSED_COBBLESTONE = "compressed_cobblestone";
         public static final String DOUBLE_COMPRESSED_COBBLESTONE = "double_compressed_cobblestone";

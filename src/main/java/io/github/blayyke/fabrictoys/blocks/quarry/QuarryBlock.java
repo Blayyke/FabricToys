@@ -17,6 +17,7 @@
 
 package io.github.blayyke.fabrictoys.blocks.quarry;
 
+import io.github.blayyke.fabrictoys.Constants;
 import io.github.blayyke.fabrictoys.FTContainers;
 import io.github.blayyke.fabrictoys.blocks.GenericBlockEntity;
 import io.github.blayyke.fabrictoys.blocks.GenericBlockWithEntity;
@@ -26,6 +27,7 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateFactory;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
@@ -80,5 +82,10 @@ public class QuarryBlock extends GenericBlockWithEntity {
     @Override
     protected Identifier getContainerId() {
         return FTContainers.QUARRY;
+    }
+
+    @Override
+    protected TranslatableText getTooltip() {
+        return new TranslatableText(Constants.tooltip(Constants.Blocks.QUARRY));
     }
 }

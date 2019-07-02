@@ -2,6 +2,6 @@
   "parent": "block/cube_column",
   "textures": {
     "end": "block/smooth_stone",
-    "side": "fabric_toys:block/cobblestone_generator"
+    "side": "fabric_toys:block/cobblestone_generator_tier_4"
   }
 }

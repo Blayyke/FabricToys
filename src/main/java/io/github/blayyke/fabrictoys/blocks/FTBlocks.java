@@ -46,7 +46,10 @@ public class FTBlocks {
     public static final Block STONE_CRAFTING_TABLE = register(Constants.Blocks.STONE_CRAFTING_TABLE, new FTCraftingTableBlock(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).build()));
     public static final Block QUARRY = register(Constants.Blocks.QUARRY, new QuarryBlock(FabricBlockSettings.of(Material.METAL).breakByTool(FabricToolTags.PICKAXES, 1).build()));
     public static final Block DISC_COPIER = register(Constants.Blocks.DISC_COPIER, new DiscCopierBlock(FabricBlockSettings.copy(Blocks.JUKEBOX).build()));
-    public static final Block COBBLESTONE_GENERATOR = register(Constants.Blocks.COBBLESTONE_GENERATOR, new CobblestoneGeneratorBlock(FabricBlockSettings.copy(QUARRY).build()));
+    public static final Block COBBLESTONE_GENERATOR_TIER_1 = register(Constants.Blocks.COBBLESTONE_GENERATOR_TIER_1, new CobblestoneGeneratorBlock(FabricBlockSettings.copy(QUARRY).build(), 1));
+    public static final Block COBBLESTONE_GENERATOR_TIER_2 = register(Constants.Blocks.COBBLESTONE_GENERATOR_TIER_2, new CobblestoneGeneratorBlock(FabricBlockSettings.copy(QUARRY).build(), 2));
+    public static final Block COBBLESTONE_GENERATOR_TIER_3 = register(Constants.Blocks.COBBLESTONE_GENERATOR_TIER_3, new CobblestoneGeneratorBlock(FabricBlockSettings.copy(QUARRY).build(), 3));
+    public static final Block COBBLESTONE_GENERATOR_TIER_4 = register(Constants.Blocks.COBBLESTONE_GENERATOR_TIER_4, new CobblestoneGeneratorBlock(FabricBlockSettings.copy(QUARRY).build(), 4));
 
     public static final Block EGG = register(Constants.Blocks.EGG, new EggBlock(FabricBlockSettings.of(Material.EGG).ticksRandomly().hardness(0.5F).build()));
     public static final Block COMPRESSED_COBBLESTONE = register(Constants.Blocks.COMPRESSED_COBBLESTONE, new Block(FabricBlockSettings.copy(Blocks.COBBLESTONE).hardness(2.5F).build()));

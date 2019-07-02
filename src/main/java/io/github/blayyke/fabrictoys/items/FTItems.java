@@ -41,7 +41,10 @@ public class FTItems {
     public static final BlockItem STONE_CRAFTING_TABLE = register(Constants.Blocks.STONE_CRAFTING_TABLE, new BlockItem(FTBlocks.STONE_CRAFTING_TABLE, new Item.Settings().group(GROUP)));
     public static final BlockItem QUARRY = register(Constants.Blocks.QUARRY, new BlockItem(FTBlocks.QUARRY, new Item.Settings().group(GROUP)));
     public static final BlockItem DISC_COPIER = register(Constants.Blocks.DISC_COPIER, new BlockItem(FTBlocks.DISC_COPIER, new Item.Settings().group(GROUP)));
-    public static final BlockItem COBBLESTONE_GENERATOR= register(Constants.Blocks.COBBLESTONE_GENERATOR, new BlockItem(FTBlocks.COBBLESTONE_GENERATOR, new Item.Settings().group(GROUP)));
+    public static final BlockItem COBBLESTONE_GENERATOR_TIER_1 = register(Constants.Blocks.COBBLESTONE_GENERATOR_TIER_1, new BlockItem(FTBlocks.COBBLESTONE_GENERATOR_TIER_1, new Item.Settings().group(GROUP)));
+    public static final BlockItem COBBLESTONE_GENERATOR_TIER_2 = register(Constants.Blocks.COBBLESTONE_GENERATOR_TIER_2, new BlockItem(FTBlocks.COBBLESTONE_GENERATOR_TIER_2, new Item.Settings().group(GROUP)));
+    public static final BlockItem COBBLESTONE_GENERATOR_TIER_3 = register(Constants.Blocks.COBBLESTONE_GENERATOR_TIER_3, new BlockItem(FTBlocks.COBBLESTONE_GENERATOR_TIER_3, new Item.Settings().group(GROUP)));
+    public static final BlockItem COBBLESTONE_GENERATOR_TIER_4 = register(Constants.Blocks.COBBLESTONE_GENERATOR_TIER_4, new BlockItem(FTBlocks.COBBLESTONE_GENERATOR_TIER_4, new Item.Settings().group(GROUP)));
 
     public static final BlockItem COMPRESSED_COBBLESTONE = register(Constants.Blocks.COMPRESSED_COBBLESTONE, new BlockItem(FTBlocks.COMPRESSED_COBBLESTONE, new Item.Settings().group(GROUP)));
     public static final BlockItem DOUBLE_COMPRESSED_COBBLESTONE = register(Constants.Blocks.DOUBLE_COMPRESSED_COBBLESTONE, new BlockItem(FTBlocks.DOUBLE_COMPRESSED_COBBLESTONE, new Item.Settings().group(GROUP)));

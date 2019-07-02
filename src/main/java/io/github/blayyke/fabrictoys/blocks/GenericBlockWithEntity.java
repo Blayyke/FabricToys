@@ -17,18 +17,29 @@
 
 package io.github.blayyke.fabrictoys.blocks;
 
+import io.github.blayyke.fabrictoys.Constants;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public abstract class GenericBlockWithEntity extends Block implements BlockEntityProvider {
     public GenericBlockWithEntity(Settings block$Settings_1) {
@@ -64,4 +75,19 @@ public abstract class GenericBlockWithEntity extends Block implements BlockEntit
     }
 
     protected abstract Identifier getContainerId();
+
+    @Override
+    public void buildTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltips, TooltipContext ctx) {
+        if (this.getTooltip() != null) {
+            Style style = new Style().setItalic(true).setColor(Formatting.GRAY);
+
+            if (Screen.hasShiftDown()) {
+                tooltips.add(getTooltip().setStyle(style));
+            } else {
+                tooltips.add(new TranslatableText(Constants.tooltip("hold_shift")).setStyle(style));
+            }
+        }
+    }
+
+    protected abstract TranslatableText getTooltip();
 }

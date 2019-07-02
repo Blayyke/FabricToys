@@ -14,7 +14,10 @@
   "block.fabric_toys.stone_crafting_table": "Stone Crafting Table",
   "block.fabric_toys.disc_copier": "Disc Copier",
   "block.fabric_toys.quarry": "Quarry",
-  "block.fabric_toys.cobblestone_generator": "Cobblestone Generator",
+  "block.fabric_toys.cobblestone_generator_tier_1": "Cobblestone Generator (Tier 1)",
+  "block.fabric_toys.cobblestone_generator_tier_2": "Cobblestone Generator (Tier 2)",
+  "block.fabric_toys.cobblestone_generator_tier_3": "Cobblestone Generator (Tier 3)",
+  "block.fabric_toys.cobblestone_generator_tier_4": "Cobblestone Generator (Tier 4)",
 
   "block.fabric_toys.compressed_cobblestone": "Compressed Cobblestone (x9)",
   "block.fabric_toys.double_compressed_cobblestone": "Compressed Cobblestone (x81)",
@@ -39,5 +42,8 @@
   "fabric_toys.machine_status.no_tool": "No tool",
   "fabric_toys.machine_status.no_fuel": "No fuel",
   "fabric_toys.machine_status.active": "Active",
-  "fabric_toys.machine_status.inactive": "Inactive"
+  "fabric_toys.machine_status.inactive": "Inactive",
+
+  "fabric_toys:tooltip.hold_shift": "Hold shift for information.",
+  "fabric_toys:tooltip.cobblestone_generator": "Generates cobblestone every %s ticks (%s seconds)."
 }

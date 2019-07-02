@@ -11,6 +11,7 @@
     "EggItemMixin",
     "PlayerEntityMixin",
     "InGameHudMixin",
+    "ThrownPotionEntityMixin",
     "ServerPlayNetworkHandlerMixin"
   ],
   "client": [

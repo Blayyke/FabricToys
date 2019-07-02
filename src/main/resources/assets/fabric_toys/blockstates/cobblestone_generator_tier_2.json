@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "fabric_toys:block/cobblestone_generator_tier_2"
+    }
+  }
+}

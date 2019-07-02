@@ -27,6 +27,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class ModConfig {
+    // TODO: Use something other than jankson, file looks like a mess when its big.
+
     private final File file;
     private final Jankson jankson;
 

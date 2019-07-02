@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MSM",
+    "SGS",
+    "MSM"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:smooth_stone"
+    },
+    "G": {
+      "item": "fabric_toys:cobblestone_generator_tier_2"
+    },
+    "M": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "fabric_toys:cobblestone_generator_tier_3"
+  }
+}
