@@ -23,10 +23,13 @@ import io.github.blayyke.fabrictoys.blocks.FTBlockEntities;
 import io.github.blayyke.fabrictoys.blocks.MachineStatus;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.ChestBlock;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ToolItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Tickable;
@@ -46,7 +49,6 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
 
     private int fuelTime;
     private int maxFuelTime;
-    private Inventory inventory;
 
     private MachineStatus status;
     private boolean active = false;
@@ -122,17 +124,6 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
 
         if (mineTime >= getMineDelay()) {
             mineTime = 0;
-            if (!world.isClient) {
-                for (Direction dir : Direction.values()) {
-                    BlockEntity above = world.getBlockEntity(this.pos.offset(dir));
-                    if (above instanceof Inventory) {
-                        this.inventory = (Inventory) above;
-                        break;
-                    } else {
-                        this.inventory = null;
-                    }
-                }
-            }
 
             if (!tryMineBlock(miningTool)) {
                 // There were no blocks to mine in the quarries area, deactivate it so it doesn't just keep looping forever. If a block is place
@@ -157,8 +148,30 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
         }
     }
 
+    private Inventory getTouchingInventory() {
+        if (!world.isClient) {
+            for (Direction dir : Direction.values()) {
+                BlockPos invPos = this.pos.offset(dir);
+                BlockEntity invEntity = world.getBlockEntity(invPos);
+                if (invEntity instanceof Inventory) {
+                    Inventory inv = (Inventory) invEntity;
+                    BlockState aboveBlock = world.getBlockState(invPos);
+                    if (invEntity instanceof ChestBlockEntity && aboveBlock.getBlock() instanceof ChestBlock) {
+                        inv = ChestBlock.getInventory(aboveBlock, world, invEntity.getPos(), true);
+                    }
+                    if (InventoryUtils.isInvFull(inv)) {
+                        // Don't return a full inventory.
+                        continue;
+                    }
+                    return inv;
+                }
+            }
+        }
+        return null;
+    }
 
     private boolean tryMineBlock(ItemStack tool) {
+        Inventory inventory = getTouchingInventory();
         BlockPos.Mutable pos = new BlockPos.Mutable();
         // Loop Y first, so it goes top to bottom.
         for (int y = corner2.getY(); y > corner1.getY(); y--) {
@@ -175,12 +188,11 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
                                     .put(LootContextParameters.POSITION, pos)
                             );
                             if (tool.getDamage() >= tool.getMaxDamage()) {
-                                System.out.println("Gone through a pickaxe!");
                                 this.setInvStack(QuarryContainer.TOOL_SLOT, ItemStack.EMPTY);
                             }
 
                             for (ItemStack stack : stacks) {
-                                storeItem(stack);
+                                storeItemInInv(inventory, stack);
                             }
                         }
 
@@ -193,41 +205,36 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
         return false;
     }
 
-    private void storeItem(ItemStack stack) {
+    private void storeItemInInv(Inventory inventory, ItemStack stackToStore) {
         if (inventory != null) {
-            // Inv above, add to inv.
-            //TODO this does not work with double chests. Fills first half then aborts and starts throwing items.
-            if (!InventoryUtils.isInvFull(inventory)) {
-                //TODO Once the inventory fills up, it will start throwing items instead of moving on to the next chest.
-                for (int i = 0; i < inventory.getInvSize(); i++) {
-                    ItemStack invStack = inventory.getInvStack(i);
-                    if (invStack.isEmpty()) {
-                        inventory.setInvStack(i, stack);
-                        break;
-                    } else if (ItemStack.areItemsEqualIgnoreDamage(invStack, stack)) {
-                        if (invStack.getCount() < invStack.getMaxCount()) {
-                            // TODO If current slot amount + mined item amount > slot stack getMaxAmount(), it will still only be added to the max and then extras are deleted.
-                            // the below does not work as i intended, however it still works the same as it used to.
-                            int newCount = invStack.getCount() + stack.getCount();
-                            if (newCount > invStack.getMaxCount()) {
-                                ItemStack copy = new ItemStack(invStack.getItem());
-                                copy.setCount(newCount - invStack.getMaxCount());
-                                storeItem(copy);
-                                newCount = invStack.getMaxCount();
-                            }
-
-                            invStack.setCount(newCount);
-                            break;
+            // Quarry is touching an inventory, add to it.
+            for (int i = 0; i < inventory.getInvSize(); i++) {
+                ItemStack invStack = inventory.getInvStack(i);
+                if (invStack.isEmpty()) {
+                    inventory.setInvStack(i, stackToStore);
+                    break;
+                } else if (ItemStack.areItemsEqualIgnoreDamage(invStack, stackToStore)) {
+                    if (invStack.getCount() < invStack.getMaxCount()) {
+                        // TODO If current slot amount + mined item amount > slot stack getMaxAmount(), it will still only be added to the max and then extras are deleted.
+                        // the below does not work as i intended, however it still works the same as it used to.
+                        int newCount = invStack.getCount() + stackToStore.getCount();
+                        if (newCount > invStack.getMaxCount()) {
+                            ItemStack remaining = new ItemStack(invStack.getItem());
+                            remaining.setCount(newCount - invStack.getMaxCount());
+                            storeItemInInv(inventory, stackToStore);
+                            newCount = invStack.getMaxCount();
                         }
+
+                        invStack.setCount(newCount);
+                        break;
                     }
                 }
-                return;
             }
-            // If inv is full, drop it as a stack.
+            return;
         }
 
         // No inv above, drop it instead
-        ItemEntity item = new ItemEntity(world, this.pos.getX(), this.pos.getY() + 1, this.pos.getZ(), stack);
+        ItemEntity item = new ItemEntity(world, this.pos.getX(), this.pos.getY() + 1, this.pos.getZ(), stackToStore);
         item.setToDefaultPickupDelay();
 //                    item.addVelocity(0.2D, 0.6D, 0.2D);
         world.spawnEntity(item);
@@ -235,7 +242,20 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
 
     private boolean shouldMineBlock(BlockPos.Mutable pos, ItemStack tool) {
         // Do not mine air. Do not mine any block with a hardness less than zero.
-        return !world.isAir(pos) && world.getFluidState(pos).isEmpty() && world.getBlockState(pos).getHardness(world, pos) > 0;
+        if (world.isAir(pos)) {
+            return false;
+        }
+
+        BlockState block = world.getBlockState(pos);
+        if (tool.getItem() instanceof ToolItem) {
+            if (!tool.getItem().isEffectiveOn(block)) {
+                // Don't attempt to mine things too high ( wooden pickaxe wont mine diamonds )
+                // TODO this works almost as intended, however dirt and other blocks that are mineable by anything are skipped.
+                return false;
+            }
+        }
+
+        return world.getFluidState(pos).isEmpty() && block.getHardness(world, pos) > 0;
     }
 
     private ItemStack getTool() {
