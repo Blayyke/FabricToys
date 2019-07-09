@@ -21,15 +21,14 @@ import io.github.blayyke.fabrictoys.InventoryUtils;
 import io.github.blayyke.fabrictoys.blocks.BlockEntityWithInventory;
 import io.github.blayyke.fabrictoys.blocks.FTBlockEntities;
 import io.github.blayyke.fabrictoys.blocks.MachineStatus;
+import io.github.blayyke.fabrictoys.util.ItemUtils;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.entity.ItemEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ToolItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Tickable;
@@ -135,7 +134,7 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
     private int getMineDelay() {
         int speedUpgradeCount = getUpgrades().getCount();
 
-        if (speedUpgradeCount >= 4) {
+        if (speedUpgradeCount == 4) {
             return 10;
         } else if (speedUpgradeCount == 3) {
             return 15;
@@ -234,28 +233,27 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
         }
 
         // No inv above, drop it instead
-        ItemEntity item = new ItemEntity(world, this.pos.getX(), this.pos.getY() + 1, this.pos.getZ(), stackToStore);
-        item.setToDefaultPickupDelay();
-//                    item.addVelocity(0.2D, 0.6D, 0.2D);
-        world.spawnEntity(item);
+        ItemUtils.dropStack(stackToStore, this.world, this.pos, 1.0F);
     }
 
     private boolean shouldMineBlock(BlockPos.Mutable pos, ItemStack tool) {
-        // Do not mine air. Do not mine any block with a hardness less than zero.
-        if (world.isAir(pos)) {
-            return false;
-        }
-
         BlockState block = world.getBlockState(pos);
-        if (tool.getItem() instanceof ToolItem) {
-            if (!tool.getItem().isEffectiveOn(block)) {
-                // Don't attempt to mine things too high ( wooden pickaxe wont mine diamonds )
-                // TODO this works almost as intended, however dirt and other blocks that are mineable by anything are skipped.
-                return false;
-            }
-        }
+//        if (tool.getItem() instanceof ToolItem) {
+//            if (!tool.isEffectiveOn(block)) {
+        // Don't attempt to mine things too high ( wooden pickaxe wont mine diamonds )
+        // TODO this works almost as intended, however dirt and other blocks that are mineable by anything are skipped.
 
-        return world.getFluidState(pos).isEmpty() && block.getHardness(world, pos) > 0;
+//                return false;
+//            }
+//        }
+
+        // TODO this does nothing, not sure how to support hand mineable blocks aswell though.
+        if (tool.isEffectiveOn(block)) {
+            return true;
+        } else {
+            // Do not mine a block that cannot also be mined without the correct tool.  Do not mine air. Do not mine any block with a hardness less than zero (bedrock).
+            return block.getMaterial().canBreakByHand() && world.getFluidState(pos).isEmpty() && !world.isAir(pos) && block.getHardness(world, pos) > 0;
+        }
     }
 
     private ItemStack getTool() {

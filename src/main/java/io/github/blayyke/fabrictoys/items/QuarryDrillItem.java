@@ -17,6 +17,10 @@
 
 package io.github.blayyke.fabrictoys.items;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.Material;
 import net.minecraft.item.Item;
 
 public class QuarryDrillItem extends Item {
@@ -27,8 +31,21 @@ public class QuarryDrillItem extends Item {
         this.miningLevel = miningLevel;
     }
 
-    //TODO use this in quarrys mining logic.
-    public int getMiningLevel() {
-        return miningLevel;
+    @Override
+    public boolean isEffectiveOn(BlockState blockState_1) {
+        // TODO pls mojang. this is taken from PickaxeItem but improved readability, I need to remove this when or if they eventually add a better way of doing it
+        Block block = blockState_1.getBlock();
+
+        if (block == Blocks.OBSIDIAN) {
+            return this.miningLevel >= 3;
+        }
+        if (block == Blocks.DIAMOND_BLOCK || block == Blocks.DIAMOND_ORE || block == Blocks.EMERALD_BLOCK || block == Blocks.EMERALD_ORE || block == Blocks.GOLD_BLOCK || block == Blocks.GOLD_ORE || block == Blocks.REDSTONE_ORE) {
+            return this.miningLevel >= 2;
+        }
+        if (block == Blocks.IRON_BLOCK || block == Blocks.IRON_ORE || block == Blocks.LAPIS_BLOCK || block == Blocks.LAPIS_ORE) {
+            return this.miningLevel >= 1;
+        }
+        Material material = blockState_1.getMaterial();
+        return material == Material.STONE || material == Material.METAL || material == Material.ANVIL;
     }
 }

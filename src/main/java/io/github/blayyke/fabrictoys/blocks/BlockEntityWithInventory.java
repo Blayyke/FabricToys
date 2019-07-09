@@ -36,7 +36,7 @@ public abstract class BlockEntityWithInventory extends GenericBlockEntity implem
 
     public BlockEntityWithInventory(BlockEntityType<?> blockEntityType_1) {
         super(blockEntityType_1);
-        contents = DefaultedList.create(getInvSize(), ItemStack.EMPTY);
+        contents = DefaultedList.ofSize(getInvSize(), ItemStack.EMPTY);
     }
 
     @Override

@@ -31,7 +31,7 @@ public abstract class InGameHudMixin {
     @Shadow
     protected abstract PlayerEntity getCameraPlayer();
 
-    @Inject(method = "draw", at = @At("RETURN"))
+    @Inject(method = "render", at = @At("RETURN"))
     public void draw(float f, CallbackInfo info) {
         FabricToysClient.drawHud(f, (InGameHud) (Object) this, getCameraPlayer());
     }

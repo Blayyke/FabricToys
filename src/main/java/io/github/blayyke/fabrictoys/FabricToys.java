@@ -26,6 +26,7 @@ import io.github.blayyke.fabrictoys.items.FTItems;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -62,7 +63,12 @@ public class FabricToys {
 
                 if (entity instanceof QuarryBlockEntity) {
                     QuarryBlockEntity quarry = (QuarryBlockEntity) entity;
-                    quarry.setActive(active);
+                    PlayerEntity player = context.getPlayer();
+                    if (quarry.canPlayerUseInv(player)) {
+                        quarry.setActive(active);
+                    } else {
+                        LOGGER.warn("Too far!");
+                    }
                 } else {
                     LOGGER.error("Received " + QUARRY_UPDATE + " packet but the BlockEntity is null!");
                 }

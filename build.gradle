@@ -28,6 +28,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:$fabric_version"
     modImplementation("roughly-enough-items:RoughlyEnoughItems:$rei_version")
     modImplementation("cloth:ClothEvents:$cloth_events_version")
+    modImplementation("cursed-chests:CursedChests:2.3.22")
     modImplementation("modmenu:ModMenu:$modmenu_version") { transitive = true }
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 }
