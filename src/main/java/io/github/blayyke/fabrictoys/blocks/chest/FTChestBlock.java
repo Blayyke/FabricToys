@@ -35,7 +35,7 @@ public class FTChestBlock extends ChestBlock implements BlockEntityProvider {
         this.doubleTexture = Constants.of("textures/entity/chest/" + texture + "_double.png");
     }
 
-    public Identifier asStringure() {
+    public Identifier asTexture() {
         return this.texture;
     }
 
