@@ -44,7 +44,7 @@ public class ChestBlockEntityRendererMixin<T extends BlockEntity & ChestAnimatio
     @Final
     private static Identifier NORMAL_TEX;
 
-    @Inject(method = "method_3562", at = @At(value = "HEAD"))
+    @Inject(method = "method_3562", at = @At(value = "HEAD"), remap = false)
     private void ft_storeEntity(T blockEntity_1, int int_1, boolean boolean_1, CallbackInfoReturnable<ChestEntityModel> info) {
 //        System.out.println(blockEntity_1);
         // TODO minecraft passes a vanilla chest BlockEntity to this to render the hand item, so custom chests will render as vanillas ones.
