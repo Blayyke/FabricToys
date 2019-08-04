@@ -18,6 +18,7 @@
 package io.github.blayyke.fabrictoys.blocks.quarry;
 
 import io.github.blayyke.fabrictoys.Constants;
+import io.github.blayyke.fabrictoys.FTPacketHandlers;
 import io.github.blayyke.fabrictoys.FabricToys;
 import io.github.blayyke.fabrictoys.blocks.MachineStatus;
 import io.github.blayyke.fabrictoys.client.FTContainerScreen;
@@ -59,7 +60,7 @@ public class QuarryScreen extends FTContainerScreen {
             quarry.setActive(active);
             buf.writeBlockPos(quarry.getPos());
             buf.writeBoolean(active);
-            ClientSidePacketRegistry.INSTANCE.sendToServer(new CustomPayloadC2SPacket(FabricToys.QUARRY_UPDATE, buf));
+            ClientSidePacketRegistry.INSTANCE.sendToServer(new CustomPayloadC2SPacket(FTPacketHandlers.QUARRY_UPDATE, buf));
         }));
     }
 

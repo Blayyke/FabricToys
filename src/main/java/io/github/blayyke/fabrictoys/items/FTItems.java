@@ -61,6 +61,8 @@ public class FTItems {
     public static Item GOLD_QUARRY_DRILL = register(Constants.Items.GOLD_QUARRY_DRILL, new QuarryDrillItem(new Item.Settings().group(GROUP).maxCount(1).maxDamage(75), ToolMaterials.GOLD.getMiningLevel())); // 32->75
     public static Item DIAMOND_QUARRY_DRILL = register(Constants.Items.DIAMOND_QUARRY_DRILL, new QuarryDrillItem(new Item.Settings().group(GROUP).maxCount(1).maxDamage(4500), ToolMaterials.DIAMOND.getMiningLevel())); // 1561->4500
 
+    public static Item PISTOL = register(Constants.Items.PISTOL, new GunItem(new Item.Settings().group(GROUP).maxCount(1).maxDamage(4500), 6, 6 * 5, 100, 10));
+
     //TODO foods?
     //tODO tools?
     //todo armors?

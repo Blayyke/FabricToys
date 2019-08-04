@@ -12,6 +12,7 @@
     "PlayerEntityMixin",
     "InGameHudMixin",
     "ThrownPotionEntityMixin",
+    "LivingEntityMixin",
     "ServerPlayNetworkHandlerMixin"
   ],
   "client": [

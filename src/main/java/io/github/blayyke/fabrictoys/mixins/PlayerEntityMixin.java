@@ -26,11 +26,14 @@ import net.minecraft.state.property.Property;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
+    @Shadow public abstract void wakeUp();
+
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType_1, World world_1) {
         super(entityType_1, world_1);
     }

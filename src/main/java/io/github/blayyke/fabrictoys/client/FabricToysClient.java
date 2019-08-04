@@ -20,20 +20,25 @@ package io.github.blayyke.fabrictoys.client;
 import io.github.blayyke.fabrictoys.Constants;
 import io.github.blayyke.fabrictoys.PrefixedLogger;
 import io.github.blayyke.fabrictoys.events.ClientDisplayMessageCallback;
+import net.fabricmc.fabric.api.client.keybinding.FabricKeyBinding;
+import net.fabricmc.fabric.api.client.keybinding.KeyBindingRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.texture.SpriteAtlasTexture;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FabricToysClient {
+    public static FabricKeyBinding reloadKeybinding;
     public static PrefixedLogger LOGGER = new PrefixedLogger("FabricToys");
     private static List<HudRenderer> HUD_RENDERERS = new ArrayList<>();
 
@@ -66,6 +71,14 @@ public class FabricToysClient {
         });
 
         //TODO add hunger to horse GUI
+        String category = "key.categories.fabric_toys";
+        if (!KeyBindingRegistry.INSTANCE.addCategory(category)) {
+            LOGGER.error("Failed to add keybinding category!");
+            category = "key.categories.gameplay";
+        }
+        reloadKeybinding = FabricKeyBinding.Builder.create(Constants.of(Constants.KeyBindings.RELOAD), InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_R, category).build();
+        KeyBindingRegistry.INSTANCE.register(reloadKeybinding);
+
         LOGGER.info("FabricToys client initialized!");
     }
 

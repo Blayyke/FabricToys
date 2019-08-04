@@ -78,6 +78,7 @@ public class Constants {
         public static final String IRON_QUARRY_DRILL = "iron_quarry_drill";
         public static final String GOLD_QUARRY_DRILL = "gold_quarry_drill";
         public static final String DIAMOND_QUARRY_DRILL = "diamond_quarry_drill";
+        public static final String PISTOL = "pistol";
     }
 
     public class Sprites {
@@ -91,5 +92,13 @@ public class Constants {
         public static final int GREEN = 0x3AB700;
         public static final int GRAY = 0x404040;
         public static final int RED = 0xFF5555;
+    }
+
+    public class KeyBindings {
+        public static final String RELOAD = "key.reload";
+    }
+
+    public class Entities {
+        public static final String BULLET = "bullet";
     }
 }

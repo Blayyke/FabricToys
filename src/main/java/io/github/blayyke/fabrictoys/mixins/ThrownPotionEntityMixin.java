@@ -29,7 +29,7 @@ public abstract class ThrownPotionEntityMixin extends ThrownEntity {
     }
 
     //applySplashEffect soon
-    @Inject(method = "method_7498", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;getEntities(Ljava/lang/Class;Lnet/minecraft/util/math/Box;)Ljava/util/List;"), locals = LocalCapture.CAPTURE_FAILSOFT)
+    @Inject(method = "applySplashPotion", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;getEntities(Ljava/lang/Class;Lnet/minecraft/util/math/Box;)Ljava/util/List;"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void ft_onCollision(List<StatusEffectInstance> effects, Entity entityHit, CallbackInfo callback, Box box) {
         if (FabricToys.CONFIG.enablePotionTweak) {
             boolean isDamage = effects.stream().anyMatch(effect -> effect.getEffectType() == StatusEffects.INSTANT_DAMAGE);
