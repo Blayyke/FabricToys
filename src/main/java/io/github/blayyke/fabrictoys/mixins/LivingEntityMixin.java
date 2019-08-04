@@ -32,7 +32,7 @@ public abstract class LivingEntityMixin {
     @Shadow
     public abstract ItemStack getStackInHand(Hand hand_1);
 
-    @Inject(method = "isSleepingInBed", at = @At("RETURN"))
+    @Inject(method = "isSleepingInBed", at = @At("RETURN"), cancellable = true)
     private void ft_isSleepingInBed(CallbackInfoReturnable<Boolean> info) {
         if (!info.getReturnValue()) {
             info.setReturnValue(getStackInHand(Hand.MAIN_HAND).getItem() == FTItems.SLEEPING_BAG || getStackInHand(Hand.OFF_HAND).getItem() == FTItems.SLEEPING_BAG);
