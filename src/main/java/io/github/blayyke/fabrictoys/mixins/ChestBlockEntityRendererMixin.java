@@ -20,7 +20,6 @@ package io.github.blayyke.fabrictoys.mixins;
 import io.github.blayyke.fabrictoys.blocks.chest.FTChestBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.block.enums.ChestType;
 import net.minecraft.client.block.ChestAnimationProgress;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
@@ -33,8 +32,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ChestBlockEntityRenderer.class)
 public abstract class ChestBlockEntityRendererMixin<T extends BlockEntity & ChestAnimationProgress> extends BlockEntityRenderer<ChestBlockEntity> {
@@ -56,35 +55,62 @@ public abstract class ChestBlockEntityRendererMixin<T extends BlockEntity & Ches
     @Final
     private static Identifier NORMAL_TEX;
 
-    @Inject(method = "render", at = @At(value = "HEAD"), remap = false)
-    private void ft_storeEntity(T blockEntity_1, float float_1, MatrixStack matrixStack_1, VertexConsumerProvider vertexConsumerProvider_1, int int_1, int int_2, CallbackInfo info) {
-        System.out.println("ChestBlockEntityRendererMixin.ft_storeEntity: " + blockEntity_1.getClass().getSimpleName());
-//        TODO minecraft passes a vanilla chest BlockEntity to this to render the hand item, so custom chests will render as vanillas ones.
-        CURRENT_ENTITY.set(blockEntity_1);
-    }
+//    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/block/entity/ChestBlockEntityRenderer;method_23690(Lnet/minecraft/block/enums/ChestType;Lnet/minecraft/util/Identifier;Lnet/minecraft/util/Identifier;Lnet/minecraft/util/Identifier;)Lnet/minecraft/util/Identifier;", ordinal = 2, shift = At.Shift.AFTER))
+//    public void a(T blockEntity_1, float float_1, MatrixStack matrixStack_1, VertexConsumerProvider vertexConsumerProvider_1, int int_1, int int_2, CallbackInfoReturnable<Identifier> info) {
+//
+//    }
 
-    @Inject(method = "method_23690", at = @At("RETURN"), cancellable = true)
-    private void i(ChestType chestType_1, Identifier single, Identifier right, Identifier left, CallbackInfoReturnable<Identifier> id) {
-        System.out.println("ChestBlockEntityRendererMixin.i");
+    @ModifyArg(
+            method = "render",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/block/entity/ChestBlockEntityRenderer;getSprite(Lnet/minecraft/util/Identifier;)Lnet/minecraft/client/texture/Sprite;")
+    )
+    private Identifier mod(Identifier id) {
         BlockEntity be = CURRENT_ENTITY.get();
         CURRENT_ENTITY.remove();
 
         if (be instanceof FTChestBlockEntity) {
-            System.out.println("Is FTBE");
-            if (field_21477.equals(left)) { // normal_left
-                System.out.println("Getting left...");
-                id.setReturnValue(ft_getLeftChestLocation(be, left));
-            }
-            if (field_21478.equals(right)) { // normal_right
-                System.out.println("Getting right...");
-                id.setReturnValue(ft_getRightChestLocation(be, right));
-            } else if (NORMAL_TEX.equals(single)) {
-                System.out.println("Getting normal...");
-                id.setReturnValue(ft_getChestLocation(be, single));
+            if (id.equals(NORMAL_TEX)) {
+                id = ((FTChestBlockEntity) be).getTexture();
+            } else if (id.equals(field_21477)) {
+                id = ((FTChestBlockEntity) be).getLeftTexture();
+            } else if (id.equals(field_21478)) {
+                id = ((FTChestBlockEntity) be).getRightTexture();
             }
         }
+
+        System.out.println("be: " + be + ",id:" + id);
+        return id;
     }
 
+    @Inject(method = "render", at = @At(value = "HEAD"), cancellable = true)
+    private void ft_storeEntity(T blockEntity_1, float float_1, MatrixStack matrixStack_1, VertexConsumerProvider vertexConsumerProvider_1, int int_1, int int_2, CallbackInfo info) {
+        System.out.println("ChestBlockEntityRendererMixin.ft_storeEntity/render: " + blockEntity_1.getClass().getSimpleName());
+//        TODO minecraft passes a vanilla chest BlockEntity to this to render the hand item, so custom chests will render as vanillas ones.
+        CURRENT_ENTITY.set(blockEntity_1);
+    }
+
+//    @Inject(method = "method_23690", at = @At("RETURN"), cancellable = true, remap = false)
+//    private void i(ChestType chestType_1, Identifier single, Identifier right, Identifier left, CallbackInfoReturnable<Identifier> id) {
+//        System.out.println("ChestBlockEntityRendererMixin.i");
+//        BlockEntity be = CURRENT_ENTITY.get();
+//        CURRENT_ENTITY.remove();
+//
+//        if (be instanceof FTChestBlockEntity) {
+//            System.out.println("Is FTBE");
+//            if (field_21477.equals(left)) { // normal_left
+//                System.out.println("Getting left...");
+//                id.setReturnValue(ft_getLeftChestLocation(be, left));
+//            }
+//            if (field_21478.equals(right)) { // normal_right
+//                System.out.println("Getting right...");
+//                id.setReturnValue(ft_getRightChestLocation(be, right));
+//            } else if (NORMAL_TEX.equals(single)) {
+//                System.out.println("Getting normal...");
+//                id.setReturnValue(ft_getChestLocation(be, single));
+//            }
+//        }
+//    }
+//
 //    @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/block/entity/ChestBlockEntityRenderer;getSprite(Lnet/minecraft/util/Identifier;)Lnet/minecraft/client/texture/Sprite;"))
 //    private Identifier ft_applyTextureAndReturnModel(Identifier id) {
 //        BlockEntity blockEntity = CURRENT_ENTITY.get();

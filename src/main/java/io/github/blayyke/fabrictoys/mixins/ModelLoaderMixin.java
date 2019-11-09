@@ -39,6 +39,6 @@ public class ModelLoaderMixin {
     private static void ft_init(CallbackInfo info) {
         DEFAULT_TEXTURES.add(FTBlocks.ACACIA_CHEST.asTexture());
         DEFAULT_TEXTURES.add(FTBlocks.ACACIA_CHEST.getLeftTexture());
-        DEFAULT_TEXTURES.add(FTBlocks.ACACIA_CHEST.getLeftTexture());
+        DEFAULT_TEXTURES.add(FTBlocks.ACACIA_CHEST.getRightTexture());
     }
 }

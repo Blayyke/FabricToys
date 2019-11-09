@@ -17,6 +17,7 @@
 
 package io.github.blayyke.fabrictoys.mixins;
 
+import io.github.blayyke.fabrictoys.blocks.FTBlockEntities;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
@@ -35,6 +36,6 @@ public abstract class BlockEntityRenderDispatcherMixin {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void ft_init(CallbackInfo info) {
-        this.register(BlockEntityType.CHEST, new ChestBlockEntityRenderer<>(BlockEntityRenderDispatcher.INSTANCE));
+        this.register(FTBlockEntities.CHEST, new ChestBlockEntityRenderer<>(BlockEntityRenderDispatcher.INSTANCE));
     }
 }
