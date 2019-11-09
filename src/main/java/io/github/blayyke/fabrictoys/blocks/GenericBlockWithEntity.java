@@ -30,6 +30,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -50,17 +51,17 @@ public abstract class GenericBlockWithEntity extends Block implements BlockEntit
     public abstract GenericBlockEntity createBlockEntity(BlockView var1);
 
     @Override
-    public boolean activate(BlockState block, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hitResult) {
+    public ActionResult onUse(BlockState block, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hitResult) {
         ((GenericBlockEntity) world.getBlockEntity(pos)).activate(block, player, hand, hitResult, world.isClient);
 
         if (getContainerId() != null) {
             if (!world.isClient) {
                 ContainerProviderRegistry.INSTANCE.openContainer(getContainerId(), player, buf -> buf.writeBlockPos(pos));
             }
-            return true;
+            return ActionResult.SUCCESS;
         }
 
-        return false;
+        return ActionResult.PASS;
     }
 
     @Override

@@ -67,16 +67,16 @@ public class GunItem extends Item {
             return super.use(world, player, hand);
         }
 
-        if (!tag.containsKey(RESERVE_AMMO_TAG)) {
+        if (!tag.contains(RESERVE_AMMO_TAG)) {
             tag.putInt(RESERVE_AMMO_TAG, maxReserveBullets);
         }
-        if (!tag.containsKey(AMMO_TAG)) {
+        if (!tag.contains(AMMO_TAG)) {
             tag.putInt(AMMO_TAG, maxBullets);
         }
-        if (!tag.containsKey(RELOADING_TAG)) {
+        if (!tag.contains(RELOADING_TAG)) {
             tag.putBoolean(RELOADING_TAG, false);
         }
-        if (!tag.containsKey(RELOAD_TIME_TAG)) {
+        if (!tag.contains(RELOAD_TIME_TAG)) {
             tag.putInt(RELOAD_TIME_TAG, 0);
         }
 

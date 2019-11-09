@@ -27,20 +27,27 @@ import net.minecraft.world.BlockView;
 
 public class FTChestBlock extends ChestBlock implements BlockEntityProvider {
     private Identifier texture;
-    private Identifier doubleTexture;
+    private Identifier rightTexture;
+    private Identifier leftTexture;
 
     public FTChestBlock(Block.Settings settings, String texture) {
         super(settings);
         this.texture = Constants.of("textures/entity/chest/" + texture + ".png");
-        this.doubleTexture = Constants.of("textures/entity/chest/" + texture + "_double.png");
+        this.rightTexture = Constants.of("textures/entity/chest/" + texture + "_right.png");
+        this.leftTexture = Constants.of("textures/entity/chest/" + texture + "_left.png");
+        System.out.println("Init chest : " + texture);
     }
 
     public Identifier asTexture() {
         return this.texture;
     }
 
-    public Identifier getDoubleTexture() {
-        return this.doubleTexture;
+    public Identifier getRightTexture() {
+        return this.rightTexture;
+    }
+
+    public Identifier getLeftTexture() {
+        return this.leftTexture;
     }
 
     @Override

@@ -52,7 +52,7 @@ public class InventoryUtils {
         ListTag listTag_1 = tag.getList("Items", 10);
 
         for (int int_1 = 0; int_1 < listTag_1.size(); ++int_1) {
-            CompoundTag compoundTag_2 = listTag_1.getCompoundTag(int_1);
+            CompoundTag compoundTag_2 = listTag_1.getCompound(int_1);
             int int_2 = compoundTag_2.getByte("Slot") & 255;
             if (int_2 >= 0 && int_2 < inv.getInvSize()) {
                 inv.setInvStack(int_2, ItemStack.fromTag(compoundTag_2));

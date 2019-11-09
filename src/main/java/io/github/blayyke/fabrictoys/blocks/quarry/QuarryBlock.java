@@ -24,7 +24,7 @@ import io.github.blayyke.fabrictoys.blocks.GenericBlockWithEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateFactory;
+import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.TranslatableText;
@@ -70,8 +70,8 @@ public class QuarryBlock extends GenericBlockWithEntity {
     }
 
     @Override
-    protected void appendProperties(StateFactory.Builder<Block, BlockState> stateFactory$Builder_1) {
-        stateFactory$Builder_1.add(FACING);
+    protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager$Builder_1) {
+        stateManager$Builder_1.add(FACING);
     }
 
     @Override

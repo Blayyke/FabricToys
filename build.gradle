@@ -25,11 +25,11 @@ dependencies {
     mappings "net.fabricmc:yarn:$yarn_mappings"
     modImplementation "net.fabricmc:fabric-loader:$loader_version"
 
+//    modImplementation("me.shedaniel.cloth:cloth-events:$cloth_events_version")
     modImplementation "net.fabricmc.fabric-api:fabric-api:$fabric_version"
-    modImplementation("roughly-enough-items:RoughlyEnoughItems:$rei_version")
-    modImplementation("cloth:ClothEvents:$cloth_events_version")
-    modImplementation("cursed-chests:CursedChests:2.3.22")
-    modImplementation("modmenu:ModMenu:$modmenu_version") { transitive = true }
+    modImplementation "me.shedaniel:RoughlyEnoughItems:$rei_version"
+    modImplementation "io.github.prospector:modmenu:$modmenu_version"
+    modImplementation "io.github.cottonmc:Jankson-Fabric:2.0.0+j1.2.0"
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 }
 

@@ -29,13 +29,13 @@ public abstract class ThrownPotionEntityMixin extends ThrownEntity {
     }
 
     //applySplashEffect soon
-    @Inject(method = "applySplashPotion", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;getEntities(Ljava/lang/Class;Lnet/minecraft/util/math/Box;)Ljava/util/List;"), locals = LocalCapture.CAPTURE_FAILSOFT)
+    @Inject(method = "applySplashPotion", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;getNonSpectatingEntities(Ljava/lang/Class;Lnet/minecraft/util/math/Box;)Ljava/util/List;"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void ft_onCollision(List<StatusEffectInstance> effects, Entity entityHit, CallbackInfo callback, Box box) {
         if (FabricToys.CONFIG.enablePotionTweak) {
             boolean isDamage = effects.stream().anyMatch(effect -> effect.getEffectType() == StatusEffects.INSTANT_DAMAGE);
 
             if (isDamage) {
-                for (BlockPos pos : BlockPos.iterate((int) box.minX, (int) box.minY, (int) box.minZ, (int) box.maxX, (int) box.maxY, (int) box.maxZ)) {
+                for (BlockPos pos : BlockPos.iterate((int) box.x1, (int) box.y1, (int) box.z1, (int) box.x2, (int) box.y2, (int) box.z2)) {
                     Block block = world.getBlockState(pos).getBlock();
                     if (block instanceof PlantBlock) {
                         world.setBlockState(pos, Blocks.AIR.getDefaultState());

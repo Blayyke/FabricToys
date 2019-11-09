@@ -19,6 +19,7 @@ package io.github.blayyke.fabrictoys.mixins;
 
 import com.mojang.authlib.GameProfile;
 import io.github.blayyke.fabrictoys.accessor.PlayerLookStackAccessor;
+import io.github.blayyke.fabrictoys.util.ItemFramePredicate;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.decoration.ItemFrameEntity;
@@ -48,9 +49,9 @@ public abstract class ClientPlayerMixin extends PlayerEntity implements PlayerLo
     @Inject(method = "tick", at = @At("HEAD"))
     public void tick(CallbackInfo info) {
         this.lookStack = ItemStack.EMPTY;
-        HitResult hitResult = MinecraftClient.getInstance().hitResult;
+        HitResult hitResult = MinecraftClient.getInstance().crosshairTarget;
         if (hitResult.getType() == HitResult.Type.ENTITY) {
-            List<ItemFrameEntity> entities = world.getEntities(ItemFrameEntity.class, new Box(new BlockPos(hitResult.getPos())));
+            List<ItemFrameEntity> entities = world.getEntities(ItemFrameEntity.class, new Box(new BlockPos(hitResult.getPos())), new ItemFramePredicate());
             entities.stream().findFirst().ifPresent(frame -> this.lookStack = frame.getHeldItemStack());
         }
     }

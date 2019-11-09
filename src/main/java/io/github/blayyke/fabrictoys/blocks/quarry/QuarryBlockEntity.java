@@ -29,13 +29,13 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.loot.context.LootContext;
-import net.minecraft.world.loot.context.LootContextParameters;
 
 import java.util.List;
 
@@ -180,7 +180,7 @@ public class QuarryBlockEntity extends BlockEntityWithInventory implements Ticka
                     if (shouldMineBlock(pos, tool)) {
                         if (!world.isClient) {
                             BlockState block = world.getBlockState(pos);
-                            world.clearBlockState(pos, true);
+                            world.removeBlock(pos, true);
                             tool.damage(1, world.random, null);
                             List<ItemStack> stacks = block.getDroppedStacks(new LootContext.Builder((ServerWorld) world)
                                     .put(LootContextParameters.TOOL, tool)

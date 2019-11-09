@@ -15,21 +15,15 @@
  *     along with FabricToys.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blayyke.fabrictoys.entity;
+package io.github.blayyke.fabrictoys.util;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
+import net.minecraft.entity.decoration.ItemFrameEntity;
 
-public class FTEntities {
-    public static final EntityType<Entity> BULLET = null;
-//    public static final EntityType<Entity> BULLET =
-//            Registry.register(
-//                    Registry.ENTITY_TYPE,
-//                    Constants.of(Constants.Entities.BULLET),
-//                    FabricEntityTypeBuilder.create(EntityCategory.MISC, (EntityType.EntityFactory<Entity>) BulletEntity::new).size(EntityDimensions.fixed(1, 1)).build()
-//            );
-    // TODO needs renderer to work.
+import java.util.function.Predicate;
 
-    public static void init() {
+public class ItemFramePredicate implements Predicate<ItemFrameEntity> {
+    @Override
+    public boolean test(ItemFrameEntity itemFrameEntity) {
+        return !itemFrameEntity.getHeldItemStack().isEmpty();
     }
 }

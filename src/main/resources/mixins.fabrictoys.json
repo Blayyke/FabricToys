@@ -3,17 +3,19 @@
   "package": "io.github.blayyke.fabrictoys.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "BlockEntityRenderDispatcherMixin",
     "CampfireMixin",
     "ChestBlockEntityMixin",
     "ChestBlockEntityRendererMixin",
     "ClientPlayerMixin",
     "CraftingTableContainerMixin",
     "EggItemMixin",
-    "PlayerEntityMixin",
     "InGameHudMixin",
-    "ThrownPotionEntityMixin",
     "LivingEntityMixin",
-    "ServerPlayNetworkHandlerMixin"
+    "ModelLoaderMixin",
+    "PlayerEntityMixin",
+    "ServerPlayNetworkHandlerMixin",
+    "ThrownPotionEntityMixin"
   ],
   "client": [
     "ClientPlayNetworkHandlerMixin",

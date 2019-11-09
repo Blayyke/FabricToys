@@ -19,19 +19,19 @@ package io.github.blayyke.fabrictoys.blocks;
 
 import io.github.blayyke.fabrictoys.util.LevelEvents;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderLayer;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.state.StateFactory;
+import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
@@ -59,19 +59,19 @@ public class EggBlock extends Block {
     }
 
     private boolean isSand(BlockView blockView_1, BlockPos blockPos_1) {
-        Block block = blockView_1.getBlockState(blockPos_1.down()).getBlock();
-        return BlockTags.DIRT_LIKE.contains(block);
+        Block block = blockView_1.getBlockState(blockPos_1.method_10074()).getBlock();
+        return block == Blocks.SAND || block == Blocks.DIRT;
     }
 
     @Override
-    protected void appendProperties(StateFactory.Builder<Block, BlockState> stateFactory$Builder_1) {
-        stateFactory$Builder_1.add(HATCH);
+    protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager$Builder_1) {
+        stateManager$Builder_1.add(HATCH);
     }
 
-    @Override
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
-    }
+//    @Override
+//    public BlockRenderType getRenderType(BlockState blockState_1) {
+//        return BlockRenderType.CUTOUT;
+//    }
 
     @Override
     public void onBlockAdded(BlockState blockState_1, World world_1, BlockPos blockPos_1, BlockState blockState_2, boolean boolean_1) {
@@ -81,20 +81,20 @@ public class EggBlock extends Block {
     }
 
     @Override
-    public void onScheduledTick(BlockState blockState_1, World world, BlockPos pos, Random random_1) {
+    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (this.shouldHatchProgress(world) && this.isSand(world, pos)) {
-            int int_1 = blockState_1.get(HATCH);
+            int int_1 = state.get(HATCH);
             if (int_1 < 2) {
-                world.playSound(null, pos, SoundEvents.ENTITY_TURTLE_EGG_CRACK, SoundCategory.BLOCKS, 0.7F, 0.9F + random_1.nextFloat() * 0.2F);
-                world.setBlockState(pos, blockState_1.with(HATCH, int_1 + 1), 2);
+                world.playSound(null, pos, SoundEvents.ENTITY_TURTLE_EGG_CRACK, SoundCategory.BLOCKS, 0.7F, 0.9F + random.nextFloat() * 0.2F);
+                world.setBlockState(pos, state.with(HATCH, int_1 + 1), 2);
             } else {
-                world.playSound(null, pos, SoundEvents.ENTITY_TURTLE_EGG_HATCH, SoundCategory.BLOCKS, 0.7F, 0.9F + random_1.nextFloat() * 0.2F);
-                world.clearBlockState(pos, false);
+                world.playSound(null, pos, SoundEvents.ENTITY_TURTLE_EGG_HATCH, SoundCategory.BLOCKS, 0.7F, 0.9F + random.nextFloat() * 0.2F);
+                world.removeBlock(pos, false);
                 if (!world.isClient) {
-                    world.playLevelEvent(LevelEvents.DESTROY_BLOCK.getId(), pos, Block.getRawIdFromState(blockState_1));
+                    world.playLevelEvent(LevelEvents.DESTROY_BLOCK.getId(), pos, Block.getRawIdFromState(state));
                     ChickenEntity chicken = EntityType.CHICKEN.create(world);
                     chicken.setBreedingAge(-24000);
-                    chicken.setPositionAndAngles(pos.getX(), pos.getY(), pos.getZ(), random_1.nextInt(180 * 2) - 180, 0.0F);
+                    chicken.setPositionAndAngles(pos.getX(), pos.getY(), pos.getZ(), random.nextInt(180 * 2) - 180, 0.0F);
                     world.spawnEntity(chicken);
                 }
             }

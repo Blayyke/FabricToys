@@ -25,7 +25,11 @@ public class FTChestBlockEntity extends ChestBlockEntity {
         return ((FTChestBlock) this.getCachedState().getBlock()).asTexture();
     }
 
-    public Identifier getDoubleTexture() {
-        return ((FTChestBlock) this.getCachedState().getBlock()).getDoubleTexture();
+    public Identifier getRightTexture() {
+        return ((FTChestBlock) this.getCachedState().getBlock()).getRightTexture();
+    }
+
+    public Identifier getLeftTexture() {
+        return ((FTChestBlock) this.getCachedState().getBlock()).getLeftTexture();
     }
 }

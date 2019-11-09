@@ -37,11 +37,11 @@ public class FTBlocks {
     public static final Block DIORITE_FURNACE = register(Constants.Blocks.DIORITE_FURNACE, new FTFurnaceBlock(FabricBlockSettings.copy(Blocks.FURNACE).build()));
     public static final Block GRANITE_FURNACE = register(Constants.Blocks.GRANITE_FURNACE, new FTFurnaceBlock(FabricBlockSettings.copy(Blocks.FURNACE).build()));
 
-    public static final Block BIRCH_CHEST = register(Constants.Blocks.BIRCH_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "birch"));
-    public static final Block ACACIA_CHEST = register(Constants.Blocks.ACACIA_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "acacia"));
-    public static final Block DARK_OAK_CHEST = register(Constants.Blocks.DARK_OAK_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "dark_oak"));
-    public static final Block SPRUCE_CHEST = register(Constants.Blocks.SPRUCE_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "spruce"));
-    public static final Block JUNGLE_CHEST = register(Constants.Blocks.JUNGLE_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "jungle"));
+    public static final FTChestBlock BIRCH_CHEST = register(Constants.Blocks.BIRCH_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "birch"));
+    public static final FTChestBlock ACACIA_CHEST = register(Constants.Blocks.ACACIA_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "acacia"));
+    public static final FTChestBlock DARK_OAK_CHEST = register(Constants.Blocks.DARK_OAK_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "dark_oak"));
+    public static final FTChestBlock SPRUCE_CHEST = register(Constants.Blocks.SPRUCE_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "spruce"));
+    public static final FTChestBlock JUNGLE_CHEST = register(Constants.Blocks.JUNGLE_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "jungle"));
 
     public static final Block STONE_CRAFTING_TABLE = register(Constants.Blocks.STONE_CRAFTING_TABLE, new FTCraftingTableBlock(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).build()));
     public static final Block QUARRY = register(Constants.Blocks.QUARRY, new QuarryBlock(FabricBlockSettings.of(Material.METAL).breakByTool(FabricToolTags.PICKAXES, 1).build()));

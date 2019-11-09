@@ -37,7 +37,7 @@ public class SleepingBagItem extends Item {
         }
 
         //TODO flashes asleep then awake. no time changee.
-        if (player.onGround && world_1.dimension.canPlayersSleep() && world_1.getBiome(player.getBlockPos()) != Biomes.NETHER) {
+        if (player.onGround && world_1.dimension.canPlayersSleep() && world_1.getBiomeAccess().getBiome(player.getBlockPos()) != Biomes.NETHER) {
             player.trySleep(player.getBlockPos()).ifLeft((failureReason) -> {
                 if (failureReason != null) {
                     player.addChatMessage(failureReason.toText(), true);
