@@ -42,6 +42,7 @@ public class FTBlocks {
     public static final FTChestBlock DARK_OAK_CHEST = register(Constants.Blocks.DARK_OAK_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "dark_oak"));
     public static final FTChestBlock SPRUCE_CHEST = register(Constants.Blocks.SPRUCE_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "spruce"));
     public static final FTChestBlock JUNGLE_CHEST = register(Constants.Blocks.JUNGLE_CHEST, new FTChestBlock(FabricBlockSettings.copy(Blocks.CHEST).build(), "jungle"));
+    public static final FTChestBlock[] CHESTS = new FTChestBlock[]{FTBlocks.ACACIA_CHEST, FTBlocks.BIRCH_CHEST, FTBlocks.DARK_OAK_CHEST, FTBlocks.JUNGLE_CHEST, FTBlocks.SPRUCE_CHEST};
 
     public static final Block STONE_CRAFTING_TABLE = register(Constants.Blocks.STONE_CRAFTING_TABLE, new FTCraftingTableBlock(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE).build()));
     public static final Block QUARRY = register(Constants.Blocks.QUARRY, new QuarryBlock(FabricBlockSettings.of(Material.METAL).breakByTool(FabricToolTags.PICKAXES, 1).build()));

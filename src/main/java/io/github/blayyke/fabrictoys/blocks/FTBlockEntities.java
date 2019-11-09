@@ -35,7 +35,7 @@ import static io.github.blayyke.fabrictoys.blocks.FTBlocks.*;
 public class FTBlockEntities {
     public static final BlockEntityType<?> DISC_COPIER = register(Constants.Blocks.DISC_COPIER, DiscCopierBlockEntity::new, FTBlocks.DISC_COPIER);
     public static final BlockEntityType<?> FURNACE = register(Constants.Blocks.FURNACE, FTFurnaceBlockEntity::new, ANDESITE_FURNACE, DIORITE_FURNACE, GRANITE_FURNACE);
-    public static final BlockEntityType<FTChestBlockEntity> CHEST = register(Constants.Blocks.CHEST, FTChestBlockEntity::new, ACACIA_CHEST, BIRCH_CHEST, DARK_OAK_CHEST, JUNGLE_CHEST, SPRUCE_CHEST);
+    public static final BlockEntityType<FTChestBlockEntity> CHEST = register(Constants.Blocks.CHEST, FTChestBlockEntity::new, CHESTS);
     public static final BlockEntityType<?> QUARRY = register(Constants.Blocks.QUARRY, QuarryBlockEntity::new, FTBlocks.QUARRY);
     public static final BlockEntityType<?> COBBLESTONE_GENERATOR = register(Constants.Blocks.COBBLESTONE_GENERATOR_TIER_1, CobblestoneGeneratorBlockEntity::new, COBBLESTONE_GENERATOR_TIER_1, COBBLESTONE_GENERATOR_TIER_2, COBBLESTONE_GENERATOR_TIER_3, COBBLESTONE_GENERATOR_TIER_4);
 

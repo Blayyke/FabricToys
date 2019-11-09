@@ -57,7 +57,10 @@ public abstract class ChestBlockEntityRendererMixin<T extends BlockEntity & Ches
 
     @ModifyArg(
             method = "render",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/block/entity/ChestBlockEntityRenderer;getSprite(Lnet/minecraft/util/Identifier;)Lnet/minecraft/client/texture/Sprite;")
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/render/block/entity/ChestBlockEntityRenderer;getSprite(Lnet/minecraft/util/Identifier;)Lnet/minecraft/client/texture/Sprite;"
+            )
     )
     private Identifier mod(Identifier id) {
         BlockEntity be = CURRENT_ENTITY.get();
@@ -73,14 +76,13 @@ public abstract class ChestBlockEntityRendererMixin<T extends BlockEntity & Ches
             }
         }
 
-        System.out.println("be: " + be + ",id:" + id);
         return id;
     }
 
     @Inject(method = "render", at = @At(value = "HEAD"), cancellable = true)
     private void ft_storeEntity(T blockEntity_1, float float_1, MatrixStack matrixStack_1, VertexConsumerProvider vertexConsumerProvider_1, int int_1, int int_2, CallbackInfo info) {
-        System.out.println("ChestBlockEntityRendererMixin.ft_storeEntity/render: " + blockEntity_1.getClass().getSimpleName());
 //        TODO minecraft passes a vanilla chest BlockEntity to this to render the hand item, so custom chests will render as vanillas ones.
+        // as of 1.15, now they just dont render in hand at all : )
         CURRENT_ENTITY.set(blockEntity_1);
     }
 }

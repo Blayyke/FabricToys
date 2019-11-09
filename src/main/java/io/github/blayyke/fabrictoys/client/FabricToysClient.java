@@ -19,6 +19,8 @@ package io.github.blayyke.fabrictoys.client;
 
 import io.github.blayyke.fabrictoys.Constants;
 import io.github.blayyke.fabrictoys.PrefixedLogger;
+import io.github.blayyke.fabrictoys.blocks.FTBlocks;
+import io.github.blayyke.fabrictoys.blocks.chest.FTChestBlock;
 import io.github.blayyke.fabrictoys.events.ClientDisplayMessageCallback;
 import net.fabricmc.fabric.api.client.keybinding.FabricKeyBinding;
 import net.fabricmc.fabric.api.client.keybinding.KeyBindingRegistry;
@@ -51,6 +53,12 @@ public class FabricToysClient {
             registry.register(Constants.of(Constants.Sprites.PICKAXE));
             registry.register(Constants.of(Constants.Sprites.UPGRADE));
             registry.register(Constants.of(Constants.Sprites.DISC));
+
+            for (FTChestBlock chest : FTBlocks.CHESTS) {
+                registry.register(chest.getTexture());
+                registry.register(chest.getLeftTexture());
+                registry.register(chest.getRightTexture());
+            }
         });
 
         HUD_RENDERERS.add(new ItemFrameHudRenderer());

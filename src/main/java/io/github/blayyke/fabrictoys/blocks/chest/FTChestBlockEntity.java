@@ -22,7 +22,7 @@ import net.minecraft.util.Identifier;
 
 public class FTChestBlockEntity extends ChestBlockEntity {
     public Identifier getTexture() {
-        return ((FTChestBlock) this.getCachedState().getBlock()).asTexture();
+        return ((FTChestBlock) this.getCachedState().getBlock()).getTexture();
     }
 
     public Identifier getRightTexture() {

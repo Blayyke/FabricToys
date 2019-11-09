@@ -32,13 +32,13 @@ public class FTChestBlock extends ChestBlock implements BlockEntityProvider {
 
     public FTChestBlock(Block.Settings settings, String texture) {
         super(settings);
-        this.texture = Constants.of("textures/entity/chest/" + texture + ".png");
-        this.rightTexture = Constants.of("textures/entity/chest/" + texture + "_right.png");
-        this.leftTexture = Constants.of("textures/entity/chest/" + texture + "_left.png");
+        this.texture = Constants.of("entity/chest/" + texture);
+        this.rightTexture = Constants.of("entity/chest/" + texture + "_right");
+        this.leftTexture = Constants.of("entity/chest/" + texture + "_left");
         System.out.println("Init chest : " + texture);
     }
 
-    public Identifier asTexture() {
+    public Identifier getTexture() {
         return this.texture;
     }
 

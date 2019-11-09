@@ -17,7 +17,6 @@
 
 package io.github.blayyke.fabrictoys.mixins;
 
-import io.github.blayyke.fabrictoys.blocks.FTBlocks;
 import net.minecraft.client.render.model.ModelLoader;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Final;
@@ -37,8 +36,8 @@ public class ModelLoaderMixin {
 
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void ft_init(CallbackInfo info) {
-        DEFAULT_TEXTURES.add(FTBlocks.ACACIA_CHEST.asTexture());
-        DEFAULT_TEXTURES.add(FTBlocks.ACACIA_CHEST.getLeftTexture());
-        DEFAULT_TEXTURES.add(FTBlocks.ACACIA_CHEST.getRightTexture());
+//        DEFAULT_TEXTURES.add(Constants.of("entity/chest/acacia"));
+//        DEFAULT_TEXTURES.add(Constants.of("entity/chest/acacia_left"));
+//        DEFAULT_TEXTURES.add(Constants.of("entity/chest/acacia_right"));
     }
 }
