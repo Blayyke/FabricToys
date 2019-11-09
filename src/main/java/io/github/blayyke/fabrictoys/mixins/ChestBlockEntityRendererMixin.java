@@ -55,11 +55,6 @@ public abstract class ChestBlockEntityRendererMixin<T extends BlockEntity & Ches
     @Final
     private static Identifier NORMAL_TEX;
 
-//    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/block/entity/ChestBlockEntityRenderer;method_23690(Lnet/minecraft/block/enums/ChestType;Lnet/minecraft/util/Identifier;Lnet/minecraft/util/Identifier;Lnet/minecraft/util/Identifier;)Lnet/minecraft/util/Identifier;", ordinal = 2, shift = At.Shift.AFTER))
-//    public void a(T blockEntity_1, float float_1, MatrixStack matrixStack_1, VertexConsumerProvider vertexConsumerProvider_1, int int_1, int int_2, CallbackInfoReturnable<Identifier> info) {
-//
-//    }
-
     @ModifyArg(
             method = "render",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/block/entity/ChestBlockEntityRenderer;getSprite(Lnet/minecraft/util/Identifier;)Lnet/minecraft/client/texture/Sprite;")
@@ -87,72 +82,5 @@ public abstract class ChestBlockEntityRendererMixin<T extends BlockEntity & Ches
         System.out.println("ChestBlockEntityRendererMixin.ft_storeEntity/render: " + blockEntity_1.getClass().getSimpleName());
 //        TODO minecraft passes a vanilla chest BlockEntity to this to render the hand item, so custom chests will render as vanillas ones.
         CURRENT_ENTITY.set(blockEntity_1);
-    }
-
-//    @Inject(method = "method_23690", at = @At("RETURN"), cancellable = true, remap = false)
-//    private void i(ChestType chestType_1, Identifier single, Identifier right, Identifier left, CallbackInfoReturnable<Identifier> id) {
-//        System.out.println("ChestBlockEntityRendererMixin.i");
-//        BlockEntity be = CURRENT_ENTITY.get();
-//        CURRENT_ENTITY.remove();
-//
-//        if (be instanceof FTChestBlockEntity) {
-//            System.out.println("Is FTBE");
-//            if (field_21477.equals(left)) { // normal_left
-//                System.out.println("Getting left...");
-//                id.setReturnValue(ft_getLeftChestLocation(be, left));
-//            }
-//            if (field_21478.equals(right)) { // normal_right
-//                System.out.println("Getting right...");
-//                id.setReturnValue(ft_getRightChestLocation(be, right));
-//            } else if (NORMAL_TEX.equals(single)) {
-//                System.out.println("Getting normal...");
-//                id.setReturnValue(ft_getChestLocation(be, single));
-//            }
-//        }
-//    }
-//
-//    @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/block/entity/ChestBlockEntityRenderer;getSprite(Lnet/minecraft/util/Identifier;)Lnet/minecraft/client/texture/Sprite;"))
-//    private Identifier ft_applyTextureAndReturnModel(Identifier id) {
-//        BlockEntity blockEntity = CURRENT_ENTITY.get();
-//        CURRENT_ENTITY.remove();
-//
-//        if (field_21477.equals(id)) { // normal_left
-//            System.out.println("Getting left...");
-//            return ft_getLeftChestLocation(blockEntity, id);
-//        }
-//        if (field_21478.equals(id)) { // normal_right
-//            System.out.println("Getting right...");
-//            return ft_getRightChestLocation(blockEntity, id);
-//        } else if (NORMAL_TEX.equals(id)) {
-//            System.out.println("Getting normal...");
-//            return ft_getChestLocation(blockEntity, id);
-//        }
-//
-//        System.out.println("Other: " + id + " :" + blockEntity.getClass().getSimpleName());
-//        return id;
-//    }
-
-    private Identifier ft_getLeftChestLocation(BlockEntity t, Identifier id) {
-        if (t instanceof FTChestBlockEntity) {
-            return ((FTChestBlockEntity) t).getLeftTexture();
-        }
-
-        return id;
-    }
-
-    private Identifier ft_getRightChestLocation(BlockEntity t, Identifier id) {
-        if (t instanceof FTChestBlockEntity) {
-            return ((FTChestBlockEntity) t).getRightTexture();
-        }
-
-        return id;
-    }
-
-    private Identifier ft_getChestLocation(BlockEntity t, Identifier id) {
-        if (t instanceof FTChestBlockEntity) {
-            return ((FTChestBlockEntity) t).getTexture();
-        }
-
-        return id;
     }
 }
