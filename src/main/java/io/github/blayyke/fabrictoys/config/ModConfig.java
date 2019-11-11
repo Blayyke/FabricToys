@@ -19,7 +19,7 @@ package io.github.blayyke.fabrictoys.config;
 
 import blue.endless.jankson.Jankson;
 import blue.endless.jankson.JsonObject;
-import blue.endless.jankson.impl.SyntaxError;
+import blue.endless.jankson.api.SyntaxError;
 import io.github.blayyke.fabrictoys.FabricToys;
 
 import java.io.File;
