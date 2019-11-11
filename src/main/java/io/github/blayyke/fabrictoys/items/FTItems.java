@@ -52,7 +52,6 @@ public class FTItems {
 
     public static Item BLANK_DISC = register(Constants.Items.BLANK_DISC, new BlankDiscItem(new Item.Settings().group(GROUP).maxCount(1)));
     public static Item WRENCH = register(Constants.Items.WRENCH, new WrenchItem(new Item.Settings().group(GROUP).maxCount(1)));
-    public static Item SLEEPING_BAG = register(Constants.Items.SLEEPING_BAG, new SleepingBagItem(new Item.Settings().group(GROUP).maxCount(1)));
     public static Item SPEED_UPGRADE = register(Constants.Items.SPEED_UPGRADE, new Item(new Item.Settings().group(GROUP).maxCount(4)));
 
     public static Item WOODEN_QUARRY_DRILL = register(Constants.Items.WOODEN_QUARRY_DRILL, new QuarryDrillItem(new Item.Settings().group(GROUP).maxCount(1).maxDamage(150), ToolMaterials.WOOD.getMiningLevel())); // 59->150
