@@ -18,6 +18,7 @@
 package io.github.blayyke.fabrictoys.blocks.chest;
 
 import io.github.blayyke.fabrictoys.Constants;
+import io.github.blayyke.fabrictoys.FabricToys;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
@@ -37,7 +38,7 @@ public class FTChestBlock extends ChestBlock implements BlockEntityProvider {
         this.texture = Constants.of("entity/chest/" + texture);
         this.rightTexture = Constants.of("entity/chest/" + texture + "_right");
         this.leftTexture = Constants.of("entity/chest/" + texture + "_left");
-        System.out.println("Init chest : " + texture);
+        FabricToys.LOGGER.debug("Init chest texture: " + texture);
     }
 
     public Identifier getTexture() {
