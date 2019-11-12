@@ -23,16 +23,22 @@ dependencies {
     //to change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:$minecraft_version"
     mappings "net.fabricmc:yarn:$yarn_mappings:v2"
-    modImplementation "net.fabricmc:fabric-loader:$loader_version"
 
 //    modImplementation("me.shedaniel.cloth:cloth-events:$cloth_events_version")
     modImplementation "net.fabricmc.fabric-api:fabric-api:$fabric_version"
 
-    modRuntime("me.shedaniel:RoughlyEnoughItems:$rei_version") { exclude module: "fabric-api" }
-    modRuntime("io.github.prospector:modmenu:$modmenu_version") { exclude module: "fabric-api" }
+    modRuntime("me.shedaniel:RoughlyEnoughItems:$rei_version") {
+        exclude module: "fabric-api"
+        exclude module: "fabric-loader"
+    }
+    modRuntime("io.github.prospector:modmenu:$modmenu_version") {
+        exclude module: "fabric-api"
+        exclude module: "fabric-loader"
+    }
     modImplementation "io.github.cottonmc:Jankson-Fabric:$jankson_version"
     include "io.github.cottonmc:Jankson-Fabric:$jankson_version"
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
+    modImplementation "net.fabricmc:fabric-loader:$loader_version"
 }
 
 processResources {
