@@ -17,14 +17,17 @@
 
 package io.github.blayyke.fabrictoys.blocks.disccopier;
 
+import com.mojang.datafixers.util.Pair;
 import io.github.blayyke.fabrictoys.Constants;
 import io.github.blayyke.fabrictoys.items.BlankDiscItem;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.container.Container;
+import net.minecraft.container.PlayerContainer;
 import net.minecraft.container.Slot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.MusicDiscItem;
+import net.minecraft.util.Identifier;
 
 public class DiscCopierContainer extends Container {
     private final PlayerEntity player;
@@ -49,9 +52,14 @@ public class DiscCopierContainer extends Container {
             }
 
             @Override
-            public String getBackgroundSprite() {
-                return Constants.ofString(Constants.Sprites.DISC);
+            public Pair<Identifier, Identifier> getBackgroundSprite() {
+                return Pair.of(PlayerContainer.field_21668, Constants.of(Constants.Sprites.DISC));
             }
+
+//            @Override
+//            public String getBackgroundSprite() {
+//                return Constants.ofString(Constants.Sprites.DISC);
+//            }
         });
 
         // Disc slot
@@ -62,9 +70,14 @@ public class DiscCopierContainer extends Container {
             }
 
             @Override
-            public String getBackgroundSprite() {
-                return Constants.ofString(Constants.Sprites.DISC);
+            public Pair<Identifier, Identifier> getBackgroundSprite() {
+                return Pair.of(PlayerContainer.field_21668, Constants.of(Constants.Sprites.DISC));
             }
+
+//            @Override
+//            public String getBackgroundSprite() {
+//                return Constants.ofString(Constants.Sprites.DISC);
+//            }
         });
 
         // Output slot

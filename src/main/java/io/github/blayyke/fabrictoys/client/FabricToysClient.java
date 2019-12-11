@@ -55,9 +55,9 @@ public class FabricToysClient {
             registry.register(Constants.of(Constants.Sprites.DISC));
 
             for (FTChestBlock chest : FTBlocks.CHESTS) {
-                registry.register(chest.getTexture());
-                registry.register(chest.getLeftTexture());
-                registry.register(chest.getRightTexture());
+                registry.register(chest.getPath());
+                registry.register(chest.getLeftPath());
+                registry.register(chest.getRightPath());
             }
         });
 

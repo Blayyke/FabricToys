@@ -17,16 +17,19 @@
 
 package io.github.blayyke.fabrictoys.blocks.quarry;
 
+import com.mojang.datafixers.util.Pair;
 import io.github.blayyke.fabrictoys.Constants;
 import io.github.blayyke.fabrictoys.items.FTItems;
 import io.github.blayyke.fabrictoys.items.QuarryDrillItem;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.container.Container;
+import net.minecraft.container.PlayerContainer;
 import net.minecraft.container.Slot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PickaxeItem;
+import net.minecraft.util.Identifier;
 
 public class QuarryContainer extends Container {
     private final PlayerEntity player;
@@ -54,9 +57,14 @@ public class QuarryContainer extends Container {
                 return fuel != null && fuel > 0;
             }
 
+//            @Override
+//            public String getBackgroundSprite() {
+//                return Constants.ofString(Constants.Sprites.COAL);
+//            }
+
             @Override
-            public String getBackgroundSprite() {
-                return Constants.ofString(Constants.Sprites.COAL);
+            public Pair<Identifier, Identifier> getBackgroundSprite() {
+                return Pair.of(PlayerContainer.field_21668, Constants.of(Constants.Sprites.COAL));
             }
         });
 
@@ -67,8 +75,8 @@ public class QuarryContainer extends Container {
             }
 
             @Override
-            public String getBackgroundSprite() {
-                return Constants.ofString(Constants.Sprites.PICKAXE);
+            public Pair<Identifier, Identifier> getBackgroundSprite() {
+                return Pair.of(PlayerContainer.field_21668, Constants.of(Constants.Sprites.PICKAXE));
             }
         });
 
@@ -80,9 +88,14 @@ public class QuarryContainer extends Container {
             }
 
             @Override
-            public String getBackgroundSprite() {
-                return Constants.ofString(Constants.Sprites.UPGRADE);
+            public Pair<Identifier, Identifier> getBackgroundSprite() {
+                return Pair.of(PlayerContainer.field_21668, Constants.of(Constants.Sprites.UPGRADE));
             }
+
+//            @Override
+//            public String getBackgroundSprite() {
+//                return Constants.ofString(Constants.Sprites.UPGRADE);
+//            }
         });
 
         int playerInvYOffset = 51;

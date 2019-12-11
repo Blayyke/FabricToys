@@ -41,7 +41,7 @@ public class QuarryBlock extends GenericBlockWithEntity {
 
     public QuarryBlock(Settings block$Settings_1) {
         super(block$Settings_1);
-        this.setDefaultState(this.stateFactory.getDefaultState().with(FACING, Direction.NORTH));
+        this.setDefaultState(this.getStateManager().getDefaultState().with(FACING, Direction.NORTH));
     }
 
     @Override

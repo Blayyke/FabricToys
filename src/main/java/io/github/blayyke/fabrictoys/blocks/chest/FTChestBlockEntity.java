@@ -18,18 +18,18 @@
 package io.github.blayyke.fabrictoys.blocks.chest;
 
 import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.util.Identifier;
+import net.minecraft.class_4730;
 
 public class FTChestBlockEntity extends ChestBlockEntity {
-    public Identifier getTexture() {
-        return ((FTChestBlock) this.getCachedState().getBlock()).getTexture();
+    public class_4730 getNormal() {
+        return ((FTChestBlock) this.getCachedState().getBlock()).getNormal();
     }
 
-    public Identifier getRightTexture() {
-        return ((FTChestBlock) this.getCachedState().getBlock()).getRightTexture();
+    public class_4730 getLeft() {
+        return ((FTChestBlock) this.getCachedState().getBlock()).getLeft();
     }
 
-    public Identifier getLeftTexture() {
-        return ((FTChestBlock) this.getCachedState().getBlock()).getLeftTexture();
+    public class_4730 getRight() {
+        return ((FTChestBlock) this.getCachedState().getBlock()).getRight();
     }
 }

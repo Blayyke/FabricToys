@@ -45,7 +45,7 @@ public class EggBlock extends Block {
 
     public EggBlock(Block.Settings settings) {
         super(settings);
-        this.setDefaultState(this.stateFactory.getDefaultState().with(HATCH, 0));
+        this.setDefaultState(this.getStateManager().getDefaultState().with(HATCH, 0));
     }
 
     @Override
